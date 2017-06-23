@@ -1,0 +1,93 @@
+{% extends "adminbase.html" %} 
+{% block main %}
+
+    <div class="content">
+            <h2 class="content-subhead">写文章</h2>
+			
+		<form class="pure-form pure-form-stacked" action="/admin/post-new-publish" method="post" >
+    <fieldset>
+        <legend><label id="showtime">显示时间的位置</label></legend>
+
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-2-3">
+                <input id="post_user_id" name="post_user_id" value="{{user.user_id}}" type="hidden">
+                <label for="post_title">标题</label>
+                <input id="post_title" name="post_title"  class="pure-u-23-24" type="text">
+          
+                <label for="post_excerpt">简介</label>
+                 <textarea name="post_excerpt" id="textarea_post_excerpt"  class="pure-u-23-24"  style="height:160px"></textarea>
+				 
+                <label for="post_content">内容</label>
+                <textarea  name="post_content" id="textarea_post_content"  class="pure-u-23-24"  style="height:360px"></textarea>
+            </div>
+
+<div class="pure-u-1 pure-u-md-1-12">
+</div>
+            <div class="pure-u-1 pure-u-md-1-4">
+                <label for="post_term_id">文章分类</label>
+                <select id="post_term_id"  name="post_term_id" class="pure-input-1-2">
+                  
+                   {% for term in terms %}
+                    <option value={{term.term_id}}>{{term.term_name}}</option>
+                    {% endfor %}
+                </select>
+               <label for="post_status" class="pure-checkbox">
+            <input id="post_status" name="post_status"  type="checkbox"> 仅存草稿，不发布
+        </label>
+
+                 <label for="post_order" class="pure-checkbox">
+            <input id="post_order" name="post_order"type="checkbox"> 是否置顶
+        </label>
+        <br>
+ <button id="publish"  type="submit" class="pure-button pure-button-primary">发布</button>
+            </div>
+           
+        </div>
+
+    </fieldset>
+</form>
+  
+		  
+		
+        </div>
+<script type="text/javascript">
+
+
+//获得当前时间,刻度为一千分一秒
+
+function showLeftTime()
+{
+var now=new Date();
+var year=now.getFullYear();
+var month=now.getMonth()+1;
+var day=now.getDate();
+var hours=now.getHours();
+var minutes=now.getMinutes();
+var seconds=now.getSeconds();
+document.all.showtime.innerHTML=""+year+"年"+month+"月"+day+"日 "+hours+":"+minutes+":"+seconds+"";
+//一秒刷新一次显示时间
+var timeID=setTimeout(showLeftTime,1000);
+}
+window.onload = showLeftTime;
+//-->
+
+  
+
+    $(document).ready(function () {
+   
+        //    var editor1 = new wangEditor('textarea_post_excerpt');
+       //     editor1.create();
+             var editor2 = new wangEditor('textarea_post_content');
+            editor2.create();
+
+       //     editor1.$editorContainer.css('z-index', 20)
+        editor2.$editorContainer.css('z-index', 10)
+                      
+    });
+
+
+</script>
+
+
+
+{% endblock %}

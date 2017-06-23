@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+
+var app = require('../app');
+var http = require('http');
+
+//引入配置文件
+var config = require('../config/development');
+
+//var fs = require('fs');
+
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+// 将端口号设置为配置文件的端口号，默认值为3000
+var port = config.port;
+
+// 打印输出端口号
+console.log('service is running ! open port is ' + port);
+
+
+
+//app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app.callback());
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+
+
+
+
+
