@@ -11,7 +11,17 @@ router
 
     });
   })
+  .get('/login',async(ctx,next)=>{
+    if(ctx.cookies.get('seeker_cookie')){
+        ctx.response.redirect('/seeker')
+    }else{
+   ctx.render('logintest.html',{
+      
+   });
 
+    }
+  })
+  
 
 
   module.exports = router;
