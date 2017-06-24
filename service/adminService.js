@@ -3,31 +3,25 @@ var db = require('../db');
 module.exports = {
 
     /**
-     * 用户名称是否存在验证
+     * 用户手机号是否存在验证
+     * @author Vickey
+     * 
      * @method userNameValid
      * 
-     * @param {String} user_login
+     * @param {String} user_phone
      * 
      * @return {bool} 
      */
-    userNameValid: async (user_login)=>{
+    userNameValid: async (user_phone) => {
+        let sql = "SELECT * FROM users "
+            + " WHERE user_phone = '" + user_phone + "'";
 
-      
+        let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
 
-    },
-
-    /**
-     * 用户邮箱是否存在验证
-     * @method userEmailValid
-     * 
-     * @param {String} user_email
-     * 
-     * @return {bool} 
-     */
-    userNameValid: async (user_email)=>{
-
-      
-
+        if (result.length > 0)
+            return true;
+        else
+            return false;
     },
 
 
@@ -41,27 +35,34 @@ module.exports = {
      * @return {obj} 用户信息 or false     
      * 
      */
-    loginValid : async (user_login,user_pwd) => {
+    loginValid: async (user_login, user_pwd) => {
+        let sql = "SELECT * FROM users "
+            + " WHERE user_phone = '" + user_phone + "'";
 
-
-return true;
-
-
-
-
-   /*     let sql = "SELECT * FROM popular.pop_users "
-                  +" WHERE (user_login = '"+ user_login + "' or user_email = '" + user_login+"')"
-                  +" AND user_pwd = '"+ user_pwd +"'"
-        
         let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
 
-        if(result.length>0){
-            let user = result[0];
-            user.user_pwd = '';
-            return user;
-        }else{
+        if (result.length > 0){
+             let user = result[0];
+                 user.user_pwd = '';
+                 return user;
+        }
+        else
             return false;
-        }*/
+
+
+        /*     let sql = "SELECT * FROM popular.pop_users "
+                       +" WHERE (user_login = '"+ user_login + "' or user_email = '" + user_login+"')"
+                       +" AND user_pwd = '"+ user_pwd +"'"
+             
+             let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
+     
+             if(result.length>0){
+                 let user = result[0];
+                 user.user_pwd = '';
+                 return user;
+             }else{
+                 return false;
+             }*/
 
     },
 

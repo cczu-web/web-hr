@@ -64,7 +64,7 @@ app.use(async (ctx, next) => {
 //加载静态文件
 app.use(staticServer(__dirname + '/public'));
 
-console.log(!isProduction);
+//console.log(!isProduction);
 
 // add nunjucks as view:
 app.use(templating('views', {
