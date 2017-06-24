@@ -13,7 +13,7 @@ router
 
     });
   })
-  .get('/login', async (ctx, next) => {
+  .get('login', async (ctx, next) => {
 
 
     ctx.render('admin_login.html', {
@@ -23,7 +23,7 @@ router
     });
   })
 
-  .post('/login-valid', async (ctx, next) => {
+  .post('login-valid', async (ctx, next) => {
 
     let msg = '账号密码错误';
 
