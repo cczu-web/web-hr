@@ -13,9 +13,7 @@ router
     });
   })
 
-.get('/register', async (ctx, next) => {
-
-
+.get('register', async (ctx, next) => {
     ctx.render('com_register.html', {
     });
   })
@@ -23,7 +21,7 @@ router
 
   //公司注册
   //注册账号密码
-  .post('/register',async (ctx, next) => {
+  .post('register',async (ctx, next) => {
    console.log('123');
    let user_phone=ctx.request.body.user_phone;
    let user_pwd=ctx.request.body.user_pwd;
