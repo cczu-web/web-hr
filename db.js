@@ -43,7 +43,7 @@ let term_salary = sequelize.define('term_salary', {
 //users
 let users = sequelize.define('user', {
     user_id: { type: Sequelize.INTEGER(11), primaryKey: true },
-    user_phone: Sequelize.INTEGER(11),
+    user_phone: Sequelize.STRING(20),
     user_pwd: Sequelize.STRING(100),
     user_role: Sequelize.INTEGER(1),
 }, {
@@ -74,7 +74,7 @@ let seekers = sequelize.define('seekers', {
 //求职者教育信息seekers_edu
 let seekers_edu = sequelize.define('seekers_edu', {
     seeker_edu_id: { type: Sequelize.INTEGER(11), primaryKey: true },
-    seeker_phone: Sequelize.INTEGER(11),
+    seeker_phone: Sequelize.STRING(20),
     seeker_edu_start: Sequelize.DATE,
     seeker_edu_end: Sequelize.DATE,
     seeker_edu_school: Sequelize.STRING(30),
@@ -88,7 +88,7 @@ let seekers_edu = sequelize.define('seekers_edu', {
 //求职者工作经历seekers_exp
 let seekers_exp = sequelize.define('seekers_exp', {
     seeker_exp_id: { type: Sequelize.INTEGER(11), primaryKey: true },
-    seeker_phone: Sequelize.INTEGER(11),
+    seeker_phone: Sequelize.STRING(20),
     seeker_exp_start: Sequelize.DATE,
     seeker_exp_end: Sequelize.DATE,
     seeker_exp_com: Sequelize.STRING(30),
@@ -105,7 +105,7 @@ let seekers_exp = sequelize.define('seekers_exp', {
 //求职者证书 seekers_certificate
 let seekers_certificate = sequelize.define('seekers_certificate', {
     seeker_certificate_id: { type: Sequelize.INTEGER(11), primaryKey: true },
-    seeker_phone: Sequelize.INTEGER(11),
+    seeker_phone: Sequelize.STRING(20),
     seeker_certi_type: Sequelize.STRING(30),
     seeker_certi_name: Sequelize.STRING(50),
     seeker_certi_datetime: Sequelize.DATE,
@@ -141,7 +141,7 @@ let coms = sequelize.define('coms', {
 //公司招聘表com_job
 let com_job = sequelize.define('com_job', {
     com_job_id: { type: Sequelize.INTEGER(11), primaryKey: true },
-    com_user_phone: Sequelize.INTEGER(11),
+    com_user_phone: Sequelize.STRING(20),
     com_job: Sequelize.STRING(30),
     com_job_province: Sequelize.STRING(20),
     com_job_city: Sequelize.STRING(20),
@@ -161,7 +161,7 @@ let com_job = sequelize.define('com_job', {
 let seek_job = sequelize.define('seek_job', {
     seek_job_id: { type: Sequelize.INTEGER(11), primaryKey: true },
     com_job_id: Sequelize.INTEGER(11),
-    seeker_phone: Sequelize.INTEGER(11),
+    seeker_phone: Sequelize.STRING(20),
     seek_time: Sequelize.DATE,
     seek_job_verify: Sequelize.TEXT('tiny'),
 
