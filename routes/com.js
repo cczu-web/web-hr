@@ -1,4 +1,5 @@
 var router = require('koa-router')();
+let comservice = require('../service/comService.js');
 const UTILS = require('../utils');
 
 router
@@ -12,17 +13,28 @@ router
     });
   })
 
-  //公司注册
-  router
-  .get('',async (ctx, next) => {
-    let  com_user_phone=ctx.params.com_user_phone;  //手机号
-    let  com_name=ctx.params.com_name;              //公司名称
-    let  com_hr=ctx.params.com_hr;                  //公司法人
+.get('/register', async (ctx, next) => {
 
 
-
+    ctx.render('com_register.html', {
+    });
   })
 
 
+  //公司注册
+  //注册账号密码
+  .post('/register',async (ctx, next) => {
+   console.log('123');
+   let user_phone=ctx.request.body.user_phone;
+   let user_pwd=ctx.request.body.user_pwd;
 
+   let result = await comservice.userregisterValid(user_login, user_pwd);
+   if(result=false){
+        ctx.render('com_register.html');
+   }
+   else{
+        ctx.render('index.html',
+        msg=' 注册成功'+user_phone);
+   }
+  })
   module.exports = router;
