@@ -14,7 +14,7 @@ const json = require('koa-json');
 const bodyparser = require('koa-bodyparser')();
 const templating = require('./templating');
 
-const isProduction = true ; //开发环境为false，生产环境为true;
+const isProduction = false ; //开发环境为false，生产环境为true;
 
 const index = require('./routes/index');
 
