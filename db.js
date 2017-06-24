@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 const config = require('./config/development');
 
 
-var sequelize = new Sequelize(config.database, config.database_username, config.database_password, {
+let sequelize = new Sequelize(config.database, config.database_username, config.database_password, {
     host: config.database_host,
     dialect: 'mysql',
     pool: {
@@ -11,109 +11,178 @@ var sequelize = new Sequelize(config.database, config.database_username, config.
         min: 0,
         idle: 6000
     },
-    logging:true,
+    logging: true,
 });
 
-
-//评论表
-var pop_comments = sequelize.define('pop_comments',{
-    comment_id :{ type: Sequelize.INTEGER(11), primaryKey: true},
-    comment_post_id : Sequelize.INTEGER(11),
-    comment_author : Sequelize.TEXT('tiny'),
-    comment_author_email : Sequelize.STRING(100),
-    comment_author_url : Sequelize.STRING(100),
-    comment_date : Sequelize.DATE,
-    comment_content : Sequelize.STRING(255),
-    comment_parent : Sequelize.INTEGER(11),
-    comment_approved : Sequelize.TEXT('tiny'),
-}, {
-        timestamps: false
-    }
-);
-
-var pop_links = sequelize.define('pop_links',{
-    link_id :{ type: Sequelize.INTEGER(11), primaryKey: true},
-    link_url :  Sequelize.STRING(100),
-    link_name :  Sequelize.STRING(100),
-    link_image :  Sequelize.STRING(255),
-    link_description :  Sequelize.STRING(255),
-    link_visible : Sequelize.TEXT('tiny'),
-    link_user_id :  Sequelize.INTEGER(11),
-    link_rating :  Sequelize.INTEGER(11),
+//职位类别表term_job
+let term_job = sequelize.define('term_job', {
+    term_job_id: { type: Sequelize.INTEGER(11), primaryKey: true },
+    term_job: Sequelize.STRING(30),
+    parent_id: Sequelize.INTEGER(11),
 
 }, {
         timestamps: false
     }
 );
+//学历类别表term_edu
+let term_edu = sequelize.define('term_edu', {
+    term_edu_id: { type: Sequelize.INTEGER(11), primaryKey: true },
+    term_edu: Sequelize.STRING(30),
+}, {
+        timestamps: false
+    }
+);
+//薪水类别表term_salary
+let term_salary = sequelize.define('term_salary', {
+    term_salary_id: { type: Sequelize.INTEGER(11), primaryKey: true },
+    term_salary: Sequelize.STRING(30),
+}, {
+        timestamps: false
+    }
+);
+//users
+let users = sequelize.define('user', {
+    user_id: { type: Sequelize.INTEGER(11), primaryKey: true },
+    user_phone: Sequelize.INTEGER(11),
+    user_pwd: Sequelize.STRING(100),
+    user_role: Sequelize.INTEGER(1),
+}, {
+        timestamps: false
+    }
+);
+//求职者信息seekers
+let seekers = sequelize.define('seekers', {
+    seeker_user_phone: { type: Sequelize.INTEGER(11), primaryKey: true },
+    seeker_name: Sequelize.STRING(20),
+    seeker_img: VARCHAR(100),
+    seeker_sex: Sequelize.tinyint(1),
+    seeker_join: Sequelize.INTEGER(4),
+    seeker_huhou: Sequelize.STRING(40),
+    seeker_living: Sequelize.STRING(40),
+    seeker_email: Sequelize.STRING(40),
+    seeker_type: Sequelize.tinyint(1),
+    seeker_workcity: Sequelize.STRING(40),
+    seeker_job: Sequelize.STRING(60),
+    seeker_salary: Sequelize.STRING(30),
+    seeker_self: Sequelize.TEXT('long'),
+    seeker_now: Sequelize.tinyint(1),
+}, {
+        timestamps: false
+    }
+);
 
-var pop_options =  sequelize.define('pop_options',{
-    option_id : {type: Sequelize.INTEGER(11), primaryKey: true},
-    option_name : Sequelize.STRING(255),
-    option_value : Sequelize.STRING(255),
+//求职者教育信息seekers_edu
+let seekers_edu = sequelize.define('seekers_edu', {
+    seeker_edu_id: { type: Sequelize.INTEGER(11), primaryKey: true },
+    seeker_phone: Sequelize.INTEGER(11),
+    seeker_edu_start: Sequelize.DATE,
+    seeker_edu_end: Sequelize.DATE,
+    seeker_edu_school: Sequelize.STRING(30),
+    seeker_edu_profession: Sequelize.STRING(30),
+    seeker_edu_education: Sequelize.STRING(30),
+
+}, {
+        timestamps: false
+    }
+);
+//求职者工作经历seekers_exp
+let seekers_exp = sequelize.define('seekers_exp', {
+    seeker_exp_id: { type: Sequelize.INTEGER(11), primaryKey: true },
+    seeker_phone: Sequelize.INTEGER(11),
+    seeker_exp_start: Sequelize.DATE,
+    seeker_exp_end: Sequelize.DATE,
+    seeker_exp_com: Sequelize.STRING(30),
+    seeker_exp_job: Sequelize.STRING(30),
+    seeker_exp_salary: Sequelize.STRING(30),
+    seeker_exp_desc: Sequelize.TEXT('long'),
+    seeker_exp_comType: Sequelize.STRING(30),
+    seeker_exp_comSize: Sequelize.STRING(30),
+
+}, {
+        timestamps: false
+    }
+);
+//求职者证书 seekers_certificate
+let seekers_certificate = sequelize.define('seekers_certificate', {
+    seeker_certificate_id: { type: Sequelize.INTEGER(11), primaryKey: true },
+    seeker_phone: Sequelize.INTEGER(11),
+    seeker_certi_type: Sequelize.STRING(30),
+    seeker_certi_name: Sequelize.STRING(50),
+    seeker_certi_datetime: Sequelize.DATE,
+
 
 }, {
         timestamps: false
     }
 );
 
-var pop_posts = sequelize.define('pop_posts', {
-    post_id: {
-        type: Sequelize.INTEGER(11),
-        primaryKey: true
-    },
-    post_user_id: Sequelize.INTEGER,
-    post_date : Sequelize.DATE,
-    post_title: Sequelize.STRING(255),
-    post_content :Sequelize.TEXT('long'),
-    post_excerpt : Sequelize.TEXT('long'),
-    post_term_id :Sequelize.INTEGER(11),
-    post_status : Sequelize.STRING(20),
-    post_order : Sequelize.INTEGER(11),
-     
+//公司信息coms
+let coms = sequelize.define('coms', {
+    com_user_phone: { type: Sequelize.INTEGER(11), primaryKey: true },
+    com_name: Sequelize.STRING(20),
+    com_hr: Sequelize.STRING(20),
+    com_img: Sequelize.STRING(100),
+    com_date: Sequelize.DATE,
+    com_type: Sequelize.STRING(20),
+    com_email: Sequelize.STRING(40),
+    com_tel: Sequelize.STRING(20),
+    com_capital: Sequelize.INTEGER(11),
+    com_province: Sequelize.STRING(20),
+    com_city: Sequelize.STRING(20),
+    com_county: Sequelize.STRING(20),
+    com_addr: Sequelize.STRING(40),
+    com_desc: Sequelize.TEXT('long'),
+    com_verify: Sequelize.tinyint(1),
+
 }, {
         timestamps: false
-    });
+    }
+);
+//公司招聘表com_job
+let com_job = sequelize.define('com_job', {
+    com_job_id: { type: Sequelize.INTEGER(11), primaryKey: true },
+    com_user_phone: Sequelize.INTEGER(11),
+    com_job: Sequelize.STRING(30),
+    com_job_province: Sequelize.STRING(20),
+    com_job_city: Sequelize.STRING(20),
+    com_job_salary: Sequelize.STRING(30),
+    com_job_num: Sequelize.INTEGER(11),
+    com_job_edu: Sequelize.STRING(30),
+    com_job_exp: Sequelize.STRING(30),
+    com_job_type: Sequelize.tinyint(1),
+    com_job_desc: Sequelize.TEXT('long'),
+    com_job_publish_time: Sequelize.DATE,
 
-var pop_terms = sequelize.define('pop_terms', {
-    term_id: {
-        type: Sequelize.INTEGER(11),
-        primaryKey: true
-    },
-    term_name: Sequelize.STRING(100),
-    term_order : Sequelize.INTEGER(11),
-    term_color : Sequelize.STRING(45),
-    
 }, {
         timestamps: false
-    });
+    }
+);
+//招聘求职表seek_job
+let seek_job = sequelize.define('seek_job', {
+    seek_job_id: { type: Sequelize.INTEGER(11), primaryKey: true },
+    com_job_id: Sequelize.INTEGER(11),
+    seeker_phone: Sequelize.INTEGER(11),
+    seek_time: Sequelize.DATE,
+    seek_job_verify: Sequelize.tinyint(1),
 
- var pop_users = sequelize.define('pop_users', {
-    user_id: {
-        type: Sequelize.INTEGER(11),
-        primaryKey: true
-    },
-    user_login : Sequelize.STRING(100),
-    user_pwd : Sequelize.STRING(100),
-    user_nickname :Sequelize.STRING(100),
-    user_email : Sequelize.STRING(100),
-    user_url : Sequelize.STRING(100),
-    user_status : Sequelize.TEXT('tiny'),
-    user_role : Sequelize.STRING(255),
- 
+
 }, {
         timestamps: false
-    });
-
-
-
+    }
+);
 module.exports = {
     sequelize,
-    pop_comments,
-    pop_links,
-    pop_options,
-    pop_posts,
-    pop_terms,
-    pop_users,
+    term_job,
+    term_edu,
+    term_salary,
+    users,
+    seekers,
+    seekers_edu,
+    seekers_exp,
+    seekers_certificate,
+    coms,
+    com_job,
+    seek_job,
 
 };
 
