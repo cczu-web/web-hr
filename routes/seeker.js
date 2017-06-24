@@ -86,9 +86,10 @@ router
        msg='改手机号已注册过！';
        else{
        await seekerservice.seekerRegister(user_phone,user_pwd);
-       ctx.response.redirect('se_index');
+       ctx.response.redirect('seeker_info');
        }
    })
+   //进入基本信息页面
    .get('seeker_info',async(ctx,next)=>{
         ctx.render('seeker_info.html', {      
 

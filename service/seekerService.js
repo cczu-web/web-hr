@@ -57,7 +57,7 @@ module.exports = {
          await db.users.create({
             user_phone: user_phone,
             user_pwd: user_pwd,
-            post_role: user_role,
+            user_role: 1,
         });
     },
 
