@@ -54,18 +54,18 @@ let users = sequelize.define('user', {
 let seekers = sequelize.define('seekers', {
     seeker_user_phone: { type: Sequelize.INTEGER(11), primaryKey: true },
     seeker_name: Sequelize.STRING(20),
-    seeker_img: VARCHAR(100),
-    seeker_sex: Sequelize.tinyint(1),
+    seeker_img : Sequelize.STRING(100),
+    seeker_sex: Sequelize.TEXT('tiny'),
     seeker_join: Sequelize.INTEGER(4),
     seeker_huhou: Sequelize.STRING(40),
     seeker_living: Sequelize.STRING(40),
     seeker_email: Sequelize.STRING(40),
-    seeker_type: Sequelize.tinyint(1),
+    seeker_type: Sequelize.TEXT('tiny'),
     seeker_workcity: Sequelize.STRING(40),
     seeker_job: Sequelize.STRING(60),
     seeker_salary: Sequelize.STRING(30),
     seeker_self: Sequelize.TEXT('long'),
-    seeker_now: Sequelize.tinyint(1),
+    seeker_now:Sequelize.TEXT('tiny'),
 }, {
         timestamps: false
     }
@@ -132,7 +132,7 @@ let coms = sequelize.define('coms', {
     com_county: Sequelize.STRING(20),
     com_addr: Sequelize.STRING(40),
     com_desc: Sequelize.TEXT('long'),
-    com_verify: Sequelize.tinyint(1),
+    com_verify:Sequelize.TEXT('tiny'),
 
 }, {
         timestamps: false
@@ -149,7 +149,7 @@ let com_job = sequelize.define('com_job', {
     com_job_num: Sequelize.INTEGER(11),
     com_job_edu: Sequelize.STRING(30),
     com_job_exp: Sequelize.STRING(30),
-    com_job_type: Sequelize.tinyint(1),
+    com_job_type:Sequelize.TEXT('tiny'),
     com_job_desc: Sequelize.TEXT('long'),
     com_job_publish_time: Sequelize.DATE,
 
@@ -163,7 +163,7 @@ let seek_job = sequelize.define('seek_job', {
     com_job_id: Sequelize.INTEGER(11),
     seeker_phone: Sequelize.INTEGER(11),
     seek_time: Sequelize.DATE,
-    seek_job_verify: Sequelize.tinyint(1),
+    seek_job_verify: Sequelize.TEXT('tiny'),
 
 
 }, {
