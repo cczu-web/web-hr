@@ -1,4 +1,4 @@
-var db = require('../db');
+let userdao = require('../dao/usersDAO');
 
 module.exports = {
     /**
@@ -7,17 +7,16 @@ module.exports = {
      * 
      * @method userNameValid
      * 
-     * @param {String} user_phone
+     * @param {user_phone}
      * 
-     * @return {bool} 
+     * @return {bool}
      */
-    userNameValid: async (user_phone) => {
-        let sql = "SELECT * FROM users "
-            + " WHERE user_phone = '" + user_phone + "'";
+    userphone_Valid: async (ctx) => {
 
-        let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
+        let user_phone = ctx.params.user_phone;
 
-        if (result.length > 0)
+        let result = userdao.user_phoneValid(user_phone);
+        if (result)
             return true;
         else
             return false;
@@ -36,26 +35,22 @@ module.exports = {
      */
     loginValid: async (ctx) => {
 
+        let user_phone = ctx.request.body.user_phone;
+        let user_pwd = ctx.request.body.user_pwd;
+        let user_role = 0;
 
-    let user_phone = ctx.request.body.user_phone;
-    let user_pwd = ctx.request.body.user_pwd;
-    
         let msg = '账号密码错误';
-
-        let res = false;
 
         if (user_phone == '' || user_pwd == '')
             msg = '请输入账号密码';
 
-        let sql = "SELECT * FROM users "
-            + " WHERE user_phone = '" + user_phone + "'"
-            + " AND user_pwd = '" + user_pwd + "'";
 
-        let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
+        let result = await userdao.getUser(user_phone, user_pwd, user_role);
 
-        if (result.length > 0) {
+        if (result) {
 
-            let user = result[0];
+            let user = result;
+
             user.user_pwd = '';
 
             //设置cookie
@@ -64,19 +59,15 @@ module.exports = {
             ctx.cookies.set('admin_cookie', cookie_value, { signed: true });
             console.log(`Set admin_cookie value: ${cookie_value}`);
 
-            msg = '登录成功！手机号为' + user_phone;
-            res = user;
-        }
-        if (res) {
-            ctx.render('index.html', {
-                msg: msg,
-            });
+          //  msg = '登录成功！手机号为' + user_phone;
+
+          ctx.response.redirect('/');
+
         } else {
             ctx.render('index.html', {
                 msg: msg,
             });
         }
-        //  return {msg,res};
 
     },
 
@@ -91,7 +82,7 @@ module.exports = {
 
         ctx.cookies.set('admin_cookie', '');
         console.log('admin logout !');
-        ctx.response.redirect('/');
+        ctx.response.redirect('login');
 
     },
 

@@ -3,6 +3,39 @@ let comservice = require('../service/comService.js');
 const UTILS = require('../utils');
 
 router
+
+//公司基初步注册
+.post('initial_register',async (ctx, next) => {
+  await comservice.com_user_initial_register(ctx);
+})
+
+//公司详细信息注册
+.post('final_register',async (ctx, next) => {
+  await comservice.com_user_final_register(ctx);
+  
+})
+
+.get('login', async (ctx, next) => {
+    ctx.render('com_register.html', {
+    });
+  })
+
+
+//公司登录
+.post('login_valid',async (ctx, next) => {
+   await comservice.loginValid(ctx);
+  })
+
+.get('*', async (ctx, next) => {
+
+ if (ctx.cookies.get('com_cookie')) {
+     await next();
+    } else {
+    ctx.response.redirect('login');
+    
+    }
+  })
+
   .get('/', async (ctx, next) => {
 
 
@@ -13,50 +46,7 @@ router
     });
   })
 
-.get('register', async (ctx, next) => {
-    ctx.render('com_register.html', {
-    });
-  })
 
 
 
-  //公司登陆
-  .post('register',async (ctx, next) => {
-   
-   let msg='';
-   let user_phone=ctx.request.body.user_phone;
-   let user_pwd=ctx.request.body.user_pwd;
-   
-   let result = await comservice.comregisterValid(user_phone, user_pwd);
-   if(result=false){
-        ctx.render('com_register.html');
-        console.log('1');
-   }
-   else{
-        console.log('2');
-        ctx.render('index.html',
-        msg=' 注册成功'+user_phone);
-   }
-  })
-
-//公司基初步注册
-.post('initial_register',async (ctx, next) => {
-  await comservice.com_user_initial_register(ctx);
-})
-
-
-
-//公司详细信息注册
-.post(('final_register',async (ctx, next) => {
-  await comservice.com_user_final_register(ctx);
-  
-})
-
-
-
-
-
-
-
-
-  module.exports = router;
+module.exports = router;
