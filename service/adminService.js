@@ -1,7 +1,6 @@
 var db = require('../db');
 
 module.exports = {
-
     /**
      * 用户手机号是否存在验证
      * @author Vickey
@@ -35,21 +34,68 @@ module.exports = {
      * @return {obj} 用户信息 or false     
      * 
      */
-    loginValid: async (user_phone, user_pwd) => {
+    loginValid: async (ctx) => {
+
+
+    let user_phone = ctx.request.body.user_phone;
+    let user_pwd = ctx.request.body.user_pwd;
+    
+        let msg = '账号密码错误';
+
+        let res = false;
+
+        if (user_phone == '' || user_pwd == '')
+            msg = '请输入账号密码';
+
         let sql = "SELECT * FROM users "
             + " WHERE user_phone = '" + user_phone + "'"
-            + " AND user_pwd = '"+user_pwd+"'";
+            + " AND user_pwd = '" + user_pwd + "'";
 
         let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
 
-        if (result.length > 0){
-             let user = result[0];
-                 user.user_pwd = '';
-                 return user;
+        if (result.length > 0) {
+
+            let user = result[0];
+            user.user_pwd = '';
+
+            //设置cookie
+            let cookie_value = Buffer.from(JSON.stringify(user)).toString('base64');
+            // ctx.cookies.set('admin_cookie', cookie_value, { signed: true, maxAge: 60 * 60 * 1000 });
+            ctx.cookies.set('admin_cookie', cookie_value, { signed: true });
+            console.log(`Set admin_cookie value: ${cookie_value}`);
+
+            msg = '登录成功！手机号为' + user_phone;
+            res = user;
         }
-        else
-            return false;
+        if (res) {
+            ctx.render('index.html', {
+                msg: msg,
+            });
+        } else {
+            ctx.render('index.html', {
+                msg: msg,
+            });
+        }
+        //  return {msg,res};
 
     },
+
+
+    /**
+        * 用户退出
+        * @method logout
+        * 
+        * 
+        */
+    logout: async (ctx) => {
+
+        ctx.cookies.set('admin_cookie', '');
+        console.log('admin logout !');
+        ctx.response.redirect('/');
+
+    },
+
+
+
 
 }
