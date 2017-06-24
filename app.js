@@ -75,10 +75,10 @@ app.use(templating('views', {
 
 router.use('/', index.routes(), index.allowedMethods());
 
-router.use('/admin', admin.routes(), admin.allowedMethods());
+router.use('/admin/', admin.routes(), admin.allowedMethods());
 
-router.use('/seeker', seeker.routes(),seeker.allowedMethods());
-router.use('/com', com.routes(), com.allowedMethods());
+router.use('/seeker/', seeker.routes(),seeker.allowedMethods());
+router.use('/com/', com.routes(), com.allowedMethods());
 
 //router.use('/user', users.routes(), users.allowedMethods());
 //router.use('/api', api.routes(), api.allowedMethods());
