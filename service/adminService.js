@@ -35,9 +35,10 @@ module.exports = {
      * @return {obj} 用户信息 or false     
      * 
      */
-    loginValid: async (user_login, user_pwd) => {
+    loginValid: async (user_phone, user_pwd) => {
         let sql = "SELECT * FROM users "
-            + " WHERE user_phone = '" + user_phone + "'";
+            + " WHERE user_phone = '" + user_phone + "'"
+            + " AND user_pwd = '"+user_pwd+"'";
 
         let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
 
@@ -48,21 +49,6 @@ module.exports = {
         }
         else
             return false;
-
-
-        /*     let sql = "SELECT * FROM popular.pop_users "
-                       +" WHERE (user_login = '"+ user_login + "' or user_email = '" + user_login+"')"
-                       +" AND user_pwd = '"+ user_pwd +"'"
-             
-             let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
-     
-             if(result.length>0){
-                 let user = result[0];
-                 user.user_pwd = '';
-                 return user;
-             }else{
-                 return false;
-             }*/
 
     },
 
