@@ -94,6 +94,7 @@ module.exports = {
 
         //   let seeker = await seekerdao.getSeeker(user_phone);
         //    let edu = await seekerdao.getSeeker_all_edu(user_phone);
+        // let edu = await seekerdao.getSeeker_all_edu(user_phone);
 
 
         ctx.render('s_index.html', {
@@ -108,6 +109,8 @@ module.exports = {
     },
     //更新求职者信息
     r_updateSeeker: async (seeker_phone) => {
+
+            ctx.response.redirect('/seeker/index');
 
     },
     //添加求职者教育信息
