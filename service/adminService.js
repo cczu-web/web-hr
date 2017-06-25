@@ -1,4 +1,5 @@
 let userdao = require('../dao/usersDAO');
+let admindao = require('../dao/adminDAO');
 
 module.exports = {
     /**
@@ -70,6 +71,48 @@ module.exports = {
         }
 
     },
+
+
+    /**
+        * 查询所有企业信息
+        * @method select_allcoms
+        * 
+        * 
+        */
+    select_allcoms :async() => {
+
+        let coms = admindao.getAllcoms;
+
+
+    },
+
+
+
+    /**
+        * 查询单个企业信息
+        * @method select_Onecom
+        * 
+        * 
+        */
+    select_Onecom :async() => {
+        let com = await  admindao.getOnecom(com_phone);
+
+    },
+
+    /**
+        * 查询所有单个企业信息
+        * @method select_allcoms
+        * 
+        * 
+        */
+    select_Onecom :async() => {
+
+    },
+
+
+
+  
+
 
 
     /**

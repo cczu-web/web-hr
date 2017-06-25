@@ -46,6 +46,17 @@ router
     });
   })
 
+  //
+  .post('com_info_register', async (ctx, next) => {
+    
+
+
+    ctx.render('index.html', {
+   
+     msg:'后台信息123',
+
+    });
+  })
 
 
 
