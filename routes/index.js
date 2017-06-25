@@ -13,7 +13,7 @@ router
 
     ctx.render('index.html', {
    
-     msg:'后台信息123',
+  
 
     });
   })
