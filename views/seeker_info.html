@@ -3,13 +3,23 @@
 <div>
 <br>
 注册
-     <form  action="login_valid" method="POST">
+     <form  action="register_info" method="POST">
    
-
-         账号： <input name="user_phone" type="text" >
-        密码：<input name="user_pwd" type="password">
-
-        <button type="submit">登录</button>
+         <button name="seeker_phone" type="hidden" >{{user_phone}}</button><br>
+        姓名： <input name="seeker_name" type="text" ><br>
+        照片：<input name="seeker_img" type="file"><br>
+        性别：<input name="seeker_sex" type="radio" value="男"><input name="seeker_sex" type="radio" value="女"><br>
+        参加工作年份： <input name="seeker_join" type="text" ><br>
+        户口所在地：<input name="seeker_huhou" type="text"><br>
+        现居地： <input name="seeker_living" type="text" ><br>
+        电子邮箱：<input name="seeker_email" type="text"><br>
+        工作性质： <input name="seeker_type" type="text" ><br>
+        期望工作地点：<input name="seeker_workcity" type="text"><br>
+        期望从事职业： <input name="seeker_job" type="text" ><br>
+        期望薪水：<input name="seeker_salary" type="text"><br>
+        自我评价： <input name="seeker_self" type="text" ><br>
+        工作状态：<input name="seeker_now" type="text"><br>
+        <button type="submit">注册</button>
         {{msg}}
   
 </form>
