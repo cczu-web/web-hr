@@ -57,7 +57,7 @@ let seekers = sequelize.define('seekers', {
     seeker_img : Sequelize.STRING(100),
     seeker_sex: Sequelize.TEXT('tiny'),
     seeker_join: Sequelize.INTEGER(4),
-    seeker_huhou: Sequelize.STRING(40),
+    seeker_hukou: Sequelize.STRING(40),
     seeker_living: Sequelize.STRING(40),
     seeker_email: Sequelize.STRING(40),
     seeker_type: Sequelize.TEXT('tiny'),
