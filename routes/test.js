@@ -15,7 +15,7 @@ router
 
    
       ctx.render('test.html', {
-          data:'this is data',
+          data:'this is data', 
       });
    
   })
