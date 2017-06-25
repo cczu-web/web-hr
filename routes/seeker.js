@@ -38,10 +38,12 @@ router
        msg='请填写账号信息';
        let flag=await seekerservice.userPhoneValid(user_phone);
        if(flag)
-       msg='改手机号已注册过！';
+       msg='该手机号已注册过！';
        else{
        await seekerservice.seekerRegister(user_phone,user_pwd);
-       ctx.response.redirect('seeker_info');
+       ctx.render('seeker_info.html',{
+         user_phone:user_phone,
+       });
        }
    })
 .get('*', async (ctx, next) => {
@@ -73,8 +75,12 @@ router
    //进入基本信息页面
    .get('seeker_info',async(ctx,next)=>{
         ctx.render('seeker_info.html', {      
-
+         
       });
+   })
+   //注册求职者基本信息
+   .post('register_info',async(ctx,next)=>{
+     await seekerservice.insertSeeker(ctx);
    })
   //账号退出
    .post('loginout',async(ctx,next)=>{
