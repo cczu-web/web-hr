@@ -6,7 +6,7 @@ module.exports = {
 
 //登陆
 loginValid: async (ctx)=>{
-       let user_phone = ctx.request.body.user_phone;
+        let user_phone = ctx.request.body.user_phone;
         let user_pwd = ctx.request.body.user_pwd;
         let user_role = 2;
 
@@ -62,13 +62,7 @@ loginValid: async (ctx)=>{
  },
 
 
-//公司最终注册
-com_user_final_register:async (ctx)=>{
 
-
-
-
-},
 
  //查询公司是否存在
  com_user_phone_Valid:async (user_phone,user_pwd)=>{
