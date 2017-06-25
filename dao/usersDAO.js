@@ -56,6 +56,40 @@ module.exports = {
 
     },
 
+    /**
+     * 插入用户数据
+     * @method insertUser
+     * 
+     * @param {String} user_phone  用户手机号
+     * @param {String} user_pwd 密码
+     * @param {String} user_role 角色
+     * 
+     * 
+     */
+    insertUser: async (user_phone,user_pwd,user_role) => {
+
+
+
+    },
+
+        /**
+     * 更新用户数据
+     * @method insertUser
+     * 
+     * @param {String} user_phone  用户手机号
+     * @param {String} user_pwd 密码
+     * @param {String} user_role 角色
+     * 
+     */
+    updateUser: async (user_phone,user_pwd,user_role) => {
+
+
+
+    },
+
+
+
+
 
 
 
