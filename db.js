@@ -133,6 +133,9 @@ let coms = sequelize.define('coms', {
     com_addr: Sequelize.STRING(40),
     com_desc: Sequelize.TEXT('long'),
     com_verify:Sequelize.TEXT('tiny'),
+    com_scale:Sequelize.STRING(30),
+    com_website: Sequelize.STRING(40),
+
 
 }, {
         timestamps: false
