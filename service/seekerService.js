@@ -12,7 +12,7 @@ module.exports = {
      * 
      * @return {bool} 
      */
-    userphone_Valid: async (ctx) => {
+    userPhone_Valid: async (ctx) => {
 
         let user_phone = ctx.params.user_phone;
 
