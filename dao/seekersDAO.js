@@ -7,7 +7,7 @@ module.exports = {
      * @method insertSeeker
      * 
      * @param  seerker
-     * 待测试
+     * 
      */
     insertSeeker: async (seeker) => {
        
