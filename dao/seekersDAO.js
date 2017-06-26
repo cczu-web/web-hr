@@ -63,12 +63,13 @@ module.exports = {
      * 待测试
      */
     updateSeeker: async (seeker) => {
+   
         let sql = "UPDATE seekers "
             + " SET seeker_name = '"+seeker.seeker_name 
             +"' , seeker_img='"+seeker.seeker_img+"', seeker_sex='"+ seeker.seeker_sex
-            +"',seeker_join='"+seeker.seeker_join+"',seeker_hukou='"+seeker.seeker_hukou +"',seeker_living= "+ seeker.seeker_living
+            +"',seeker_join='"+seeker.seeker_join+"',seeker_hukou='"+seeker.seeker_hukou +"',seeker_living= '"+ seeker.seeker_living
             +"',seeker_email='"+seeker.seeker_email+"',seeker_type='"+seeker.seeker_type+"',seeker_workcity='"+seeker.seeker_workcity
-            +"',seeker_job='"+seeker.seeker_job+"',seeker_salary'"+seeker.seeker_job
+            +"',seeker_job='"+seeker.seeker_job+"',seeker_salary = '"+seeker.seeker_job+"'"
             +" WHERE seeker_user_phone =  '"+seeker.seeker_user_phone+"'";
         
         await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.UPDATE });

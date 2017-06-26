@@ -56,6 +56,19 @@ router
     
     }
   })
+  
+.post('*', async (ctx, next) => {
+
+ if (ctx.cookies.get('seeker_cookie')) {
+  
+    ctx.state.seeker = UTILS.parse(ctx.cookies.get('seeker_cookie'));
+    console.log(ctx.state.seeker);
+     await next();
+    } else {
+    ctx.response.redirect('/seeker/login');
+    
+    }
+  })
 
    .get('/', async (ctx, next) => {
 
@@ -72,6 +85,11 @@ router
   .get('index',async(ctx,next)=>{
      await seekerservice.r_seekerIndex(ctx);
   })
+
+  .post('update_expect',async(ctx,next)=>{
+     
+      await seekerservice.r_seeker_update_expect(ctx);
+   })
 
 
 

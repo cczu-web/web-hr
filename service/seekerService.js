@@ -45,14 +45,12 @@ module.exports = {
 
         let result = await userdao.getUser(user_phone, user_pwd, user_role);
 
+
         if (result) {
-
-            let user = result;
-
-            user.user_pwd = '';
+            let seeker = await seekerdao.getSeeker(user_phone);
 
             //设置cookie
-            let cookie_value = Buffer.from(JSON.stringify(user)).toString('base64');
+            let cookie_value = Buffer.from(JSON.stringify(seeker)).toString('base64');
             // ctx.cookies.set('admin_cookie', cookie_value, { signed: true, maxAge: 60 * 60 * 1000 });
             ctx.cookies.set('seeker_cookie', cookie_value, { signed: true });
             console.log(`Set seeker_cookie value: ${cookie_value}`);
@@ -85,21 +83,39 @@ module.exports = {
 
     r_seekerIndex: async (ctx) => {
 
-        let seeker = {
-            seeker_user_phone: '',
-            seeker_name:'刘旭',
-        }
-        let user_phone = ctx.state.seeker.user_phone;
+        let seeker = ctx.state.seeker;
 
-
-        //   let seeker = await seekerdao.getSeeker(user_phone);
-        //    let edu = await seekerdao.getSeeker_all_edu(user_phone);
-        // let edu = await seekerdao.getSeeker_all_edu(user_phone);
-
+        let seeker_edu = await seekerdao.getSeeker_all_edu(seeker.seeker_user_phone);
+        let seeker_exp = await seekerdao.getSeeker_all_exp(seeker.seeker_user_phone);
 
         ctx.render('s_index.html', {
-            seeker: seeker
+            seeker: seeker,
+            seeker_edu: seeker_edu,
+            seeker_exp: seeker_exp
         });
+    },
+
+    //更新求职期望信息
+    r_seeker_update_expect: async (ctx) => {
+        let seeker = ctx.state.seeker;
+
+        seeker.seeker_type = ctx.request.body.seeker_type;
+        seeker.seeker_workcity = ctx.request.body.seeker_workcity;
+        seeker.seeker_job = ctx.request.body.seeker_job;
+        seeker.seeker_salary = ctx.request.body.seeker_salary;
+        console.log("ctx.request.body.seeker_salary" + ctx.request.body.seeker_salary)
+
+        await seekerdao.updateSeeker(seeker);
+
+        //更新cookie
+        seeker = await seekerdao.getSeeker(seeker.seeker_user_phone);
+        //设置cookie
+        let cookie_value = Buffer.from(JSON.stringify(seeker)).toString('base64');
+        // ctx.cookies.set('admin_cookie', cookie_value, { signed: true, maxAge: 60 * 60 * 1000 });
+        ctx.cookies.set('seeker_cookie', cookie_value, { signed: true });
+      //  console.log(`Set seeker_cookie value: ${cookie_value}`);
+
+        ctx.response.redirect('/seeker/index');
     },
 
     //获取求职者信息
@@ -110,7 +126,7 @@ module.exports = {
     //更新求职者信息
     r_updateSeeker: async (seeker_phone) => {
 
-            ctx.response.redirect('/seeker/index');
+        ctx.response.redirect('/seeker/index');
 
     },
     //添加求职者教育信息
