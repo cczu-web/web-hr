@@ -94,7 +94,5 @@ module.exports = {
 
 
 
-//>>>>>>> d9edd10e8b46ef250d4cfc51f362b47456232716
-
 
 }

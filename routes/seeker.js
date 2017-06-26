@@ -8,10 +8,9 @@ router
 
     //console.log('dengl');
     if(ctx.cookies.get('seeker_cookie')){
-      ctx.response.redirect('se_index');
-     
+      ctx.response.redirect('/seeker/index');
     }else{
-    ctx.render('seeker_login.html', {
+    ctx.render('s_login.html', {
    
    });
     }
@@ -20,12 +19,10 @@ router
 //登录验证
   .post('login_valid', async (ctx, next) => {
       await seekerservice.loginValid(ctx);
-
   })
   //注册
   .get('seeker_register',async(ctx,next)=>{
     ctx.render('seeker_register.html', {
-    
    });   
   })
    //注册验证
@@ -46,15 +43,20 @@ router
        });
        }
    })
+
 .get('*', async (ctx, next) => {
 
  if (ctx.cookies.get('seeker_cookie')) {
+  
+    ctx.state.seeker = UTILS.parse(ctx.cookies.get('seeker_cookie'));
+    console.log(ctx.state.seeker);
      await next();
     } else {
-    ctx.response.redirect('login');
+    ctx.response.redirect('/seeker/login');
     
     }
   })
+
    .get('/', async (ctx, next) => {
 
 
@@ -64,14 +66,21 @@ router
 
     });
   })
-  //登陆成功到求职者主页面
-  .get('se_index',async(ctx,next)=>{
-     ctx.render('seeker_index.html', {
-   
-     msg:'后台信息：求职者',
 
-    });
+
+  //登陆成功到求职者主页面
+  .get('index',async(ctx,next)=>{
+     await seekerservice.r_seekerIndex(ctx);
   })
+
+
+
+
+
+
+
+
+
    //进入基本信息页面
    .get('seeker_info',async(ctx,next)=>{
         ctx.render('seeker_info.html', {      
