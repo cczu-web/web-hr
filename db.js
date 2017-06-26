@@ -156,6 +156,7 @@ let com_job = sequelize.define('com_job', {
     com_job_exp: Sequelize.STRING(30),
     com_job_type:Sequelize.TEXT('tiny'),
     com_job_desc: Sequelize.TEXT('long'),
+    com_job_status:Sequelize.TEXT('tiny'),
     com_job_publish_time: Sequelize.DATE,
 
 }, {
