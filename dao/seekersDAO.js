@@ -210,14 +210,14 @@ module.exports = {
      * @method updateSeeker_edu
      * 
      * @param seeker_edu_id,seeker_edu
-     * 待测试
+     * 
      */
     updateSeeker_edu: async (seeker_edu_id,seeker_edu) => {
        
      let sql = "UPDATE seekers_edu "
-            + " SET seeker_phone='"+seeker_edu.seeker_phone+"' ,seeker_edu_start = '"+seeker_edu.seeker_edu_start 
+            + " SET seeker_edu_start = '"+seeker_edu.seeker_edu_start 
             +"' , seeker_edu_end='"+seeker_edu.seeker_edu_end+"', seeker_edu_school='"+seeker_edu.seeker_edu_school
-            +"',seeker_edu_profession='"+seeker_edu.seeker_edu_profession+"',seeker_edu_education='"+seeker_edu.seeker_edu_education 
+            +"',seeker_edu_profession='"+seeker_edu.seeker_edu_profession+"',seeker_edu_education='"+seeker_edu.seeker_edu_education +"'"
             +" WHERE seeker_edu_id =  '"+seeker_edu.id+"'";
         
         await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.UPDATE });
@@ -230,15 +230,15 @@ module.exports = {
      * @method updateSeeker_exp
      * 
      * @param seeker_exp_id,seeker_edu
-     * 待测试
+     * 
      */
     updateSeeker_exp: async (seeker_exp_id,seeker_exp) => {
        
      let sql = "UPDATE seekers_exp "
-            + " SET seeker_phone='"+seeker_exp.seeker_phone+"' ,seeker_exp_start = '"+seeker_exp.seeker_exp_start 
+            + " SET seeker_exp_start = '"+seeker_exp.seeker_exp_start 
             +"' , seeker_exp_end='"+seeker_exp.seeker_exp_end+"', seeker_exp_com='"+ seeker_exp.seeker_exp_com
             +"',seeker_exp_job='"+seeker_exp.seeker_exp_job+"',seeker_exp_salary='"+seeker_exp.seeker_exp_salary +"',seeker_exp_desc= "+ seeker_exp.seeker_exp_comType
-            +"',seeker_exp_comsize'"+seeker_exp.seeker_exp_comsize
+            +"',seeker_exp_comsize'"+seeker_exp.seeker_exp_comsize +"'"
             +" WHERE seeker_exp_id =  '"+seeker_exp.seeker_exp_id+"'";
         
         await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.UPDATE });
@@ -308,7 +308,12 @@ module.exports = {
          let sql = "DELETE FROM seekers_certificate WHERE seeker_cert_id = "+seeker_certificate_id;
     await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.DELETE });
      
-    },
+},
+
+getSeeker_jobs : async (seeker_user_phone)=>{
+    let sql = "SELECT * FROM ";
+
+},
 
 
 

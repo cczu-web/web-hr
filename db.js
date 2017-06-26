@@ -129,7 +129,7 @@ let coms = sequelize.define('coms', {
     com_capital: Sequelize.INTEGER(11),
     com_province: Sequelize.STRING(20),
     com_city: Sequelize.STRING(20),
-    com_county: Sequelize.STRING(20),
+    com_country: Sequelize.STRING(20),
     com_addr: Sequelize.STRING(40),
     com_desc: Sequelize.TEXT('long'),
     com_verify:Sequelize.TEXT('tiny'),
