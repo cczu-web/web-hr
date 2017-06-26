@@ -2,6 +2,7 @@ let db = require('../db');
 
 module.exports = {
 
+
      /**
      * 添加公司信息
      * @method insertSeeker
@@ -166,7 +167,6 @@ module.exports = {
        
      
     },
-
 
 
 

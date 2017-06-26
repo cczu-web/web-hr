@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block main %}
+
+<div>
+<br>
+登录
+   <form  action=" com_info_register" method="POST">
+        公司名称： <input name="com_name" type="text" ><br>
+        负责人：<input name="com_hr" type="text"><br>
+        公司照片：<input name="com_img" type="text"> <br>
+        公司成立年份： <input name="com_date" type="text" ><br>
+        公司性质：<input name="com_type" type="text"><br>
+        电子邮箱： <input name="com_email" type="text" ><br>
+        固话：<input name="com_tel" type="text"><br>
+        注册资本： <input name="com_capital" type="text" ><br>
+        所在省：<input name="com_province" type="text"><br>
+        所在市： <input name="com_city" type="text" ><br>
+        所在县：<input name="com_country" type="text"><br>
+        所在地址： <input name="com_add" type="text" ><br>
+        公司简介：<input name="com_desc" type="text"><br>
+        <button type="submit">注册<tton>
+        {{msg}}
+  </form>
+<br>
+</div>
+
+{% endblock %}

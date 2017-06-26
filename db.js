@@ -104,11 +104,11 @@ let seekers_exp = sequelize.define('seekers_exp', {
 );
 //求职者证书 seekers_certificate
 let seekers_certificate = sequelize.define('seekers_certificate', {
-    seeker_certificate_id: { type: Sequelize.INTEGER(11), primaryKey: true },
+    seeker_cert_id: { type: Sequelize.INTEGER(11), primaryKey: true },
     seeker_phone: Sequelize.STRING(20),
-    seeker_certi_type: Sequelize.STRING(30),
-    seeker_certi_name: Sequelize.STRING(50),
-    seeker_certi_datetime: Sequelize.DATE,
+    seeker_cert_type: Sequelize.STRING(30),
+    seeker_cert_name: Sequelize.STRING(50),
+    seeker_cert_datetime: Sequelize.DATE,
 
 
 }, {
@@ -133,6 +133,9 @@ let coms = sequelize.define('coms', {
     com_addr: Sequelize.STRING(40),
     com_desc: Sequelize.TEXT('long'),
     com_verify:Sequelize.TEXT('tiny'),
+    com_scale:Sequelize.STRING(30),
+    com_website: Sequelize.STRING(40),
+
 
 }, {
         timestamps: false

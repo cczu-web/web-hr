@@ -6,7 +6,7 @@ module.exports = {
 
 //登陆
 loginValid: async (ctx)=>{
-       let user_phone = ctx.request.body.user_phone;
+        let user_phone = ctx.request.body.user_phone;
         let user_pwd = ctx.request.body.user_pwd;
         let user_role = 2;
 
@@ -62,13 +62,7 @@ loginValid: async (ctx)=>{
  },
 
 
-//公司最终注册
-com_user_final_register:async (ctx)=>{
 
-
-
-
-},
 
  //查询公司是否存在
  com_user_phone_Valid:async (user_phone,user_pwd)=>{
@@ -84,6 +78,34 @@ com_user_final_register:async (ctx)=>{
         }
 
     },
- 
+   //添加公司信息,coms
+   r_insertCom:async(ctx)=>{
+
+   },
+   //获取当前公司信息,coms
+   r_getCom:async(com_user_phone)=>{
+
+   },
+   //更新公司信息,coms
+   r_updateCom:async(ctx)=>{
+
+   },
+   //添加一条公司招聘信息
+   r_insertCom_job:async(ctx,com_user_phone)=>{
+
+   },
+   //获取一条招聘信息
+   getCom_job:async(com_job_id)=>{
+
+   },
+   //获取当前公司的所有招聘信息
+   getAllCom_job:async(com_user_phone)=>{
+
+   },
+   //获取一个职位的所有申请信息
+   getAllSeek_job:async(com_job_id)=>{
+
+   },
+   //查看一个职位其中一个申请人的具体
 
 }
