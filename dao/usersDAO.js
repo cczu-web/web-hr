@@ -2,6 +2,8 @@ let db = require('../db');
 
 module.exports = {
 
+
+
      /**
      * 用户手机号是否存在验证
      * @author Vickey
@@ -66,8 +68,12 @@ module.exports = {
      * 
      * 
      */
-    insertUser: async (user_phone,user_pwd,user_role) => {
-
+    insertUser: async (user) => {
+      await db.users.create({
+            user_phone: user.user_phone,
+            user_pwd: user.user_pwd,
+            user_role: user.user_role,
+        });
 
 
     },
