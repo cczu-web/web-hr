@@ -23,15 +23,17 @@ module.exports = {
             com_capital:com.com_capital,
             com_province:com.com_province,
             com_city:com.com_city,
-            com_county:com.com_county,
+            com_country:com.com_country,
             com_add:com.com_add,
             com_desc: com.com_desc,
             com_verify:0,
+            com_scale:com.com_scale,
+            com_website:com.com_website,
    });
      
     },
 
- /**
+    /**
      * 更新公司信息
      * @method updateSeeker
      * @param  com
@@ -40,14 +42,15 @@ module.exports = {
     updateCom: async (com) => {
 
         let sql = "UPDATE coms "
-            +"  SET com_name='"+com.com_name+"' ,com_hr = '"+com.com_hr
-            +"',com_img='"+com.com_img+"', com_date='"+ com.com_date
-            +"',com_type='"+com.com_type+"',com_emali='"+com.com_email
-            +"',com_tel='"+com.com_tel+"',com_capital='"+com.com_capital
-            +"',com_province='"+com.com_province+"',com_city='"+com.com_city
-            +"',com_county='"+com.com_county+"',com_add='"+com.com_add
-            +"',com_desc='"+com.com_desc+"',com_verify='"+com.com_verify
-            +" WHERE com_user_phone =  '"+com.com_user_phone+"'";
+            +"SET com_name='"+com.com_name+"' ,com_hr = '"+com.com_hr+"',"////负责人
+            +"com_img='"+com.com_img+"', com_date='"+ com.com_date+"',"
+            +"com_type='"+com.com_type+"',com_email='"+com.com_email+"',"
+            +"com_tel='"+com.com_tel+"',com_capital='"+com.com_capital+"',"
+            +"com_province='"+com.com_province+"',com_city='"+com.com_city+"',"
+            +"com_country='"+com.com_country+"',com_addr='"+com.com_addr+"',"
+            +"com_desc='"+com.com_desc+"',com_verify='"+com.com_verify+"',"
+            +"com_scale='"+com.com_scale+"',com_website='"+com.com_website+"'"
+            +" WHERE com_user_phone ='"+com.com_user_phone+"'";
             
             await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.UPDATE });
      
@@ -61,7 +64,7 @@ module.exports = {
     getCom: async (com_user_phone) => {
         let sql="SELECT * "+
             "FROM  coms" 
-            +"WHERE com_user_phone='"+com_user_phone+"'"
+            +" WHERE  com_user_phone='"+com_user_phone+"'";
         let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
 
         if (result.length > 0) {
@@ -80,18 +83,19 @@ module.exports = {
      */
     insertCom_job: async (com_job) => {
         await db.com_job.create({
-            com_user_phone:com.com_user_phone,
-            com_job:com.com_job,
-            com_job_province:com.com_job_province,
-            com_job_city:com.com_job_city,
-            com_job_salary:com.com_job_salary,
-            com_job_num:com.com_job_num,
-            com_job_state:com.com_job_state,
-            com_job_edu:com.com_job_edu,
-            com_job_exp:com.com_job_exp,
-            com_job_type:com.com_job_type,
-            com_job_desc:com.com_job_desc,
-            com_job_publish_time:com.com_job_publish_time,   
+            com_user_phone:com_job.com_user_phone,
+            com_job:com_job.com_job,
+            com_job_province:com_job.com_job_province,
+            com_job_city:com_job.com_job_city,
+            com_job_salary:com_job.com_job_salary,
+            com_job_num:com_job.com_job_num,
+            com_job_edu:com_job.com_job_edu,
+            com_job_exp:com_job.com_job_exp,
+            com_job_type:com_job.com_job_type,
+            com_job_desc:com_job.com_job_desc,
+            com_job_publish_time:com_job.com_job_publish_time, 
+            com_job_status:com_job.com_job_status,
+            com_job_addr:com_job.com_job_ddr,  
         })
     },
 
@@ -103,13 +107,14 @@ module.exports = {
      */
     updateCom_job: async (com_job) => {
         let sql = "UPDATE com_job "
-            +"  SET com_job='"+com_job.com_job+"' ,com_job_province = '"+com_job.com_job_province
-            +"',com_job_city='"+com_job.com_job_city+"', com_job_salary='"+ com_job.com_job_salary
-            +"',com_job_num='"+com_job.com_job_num+"',com_job_state='"+com_job.com_job_state
-            +"',com_job_edu='"+com_job.com_job_edu+"',com_job_exp='"+com_job.com_job_exp
-            +"',com_job_type='"+com_job.com_job_type+"',com_job_desc='"+com.com_job.com_job_desc
-            +"',com_job_publish_time='"+com_job.com_job_publish_time
-            +" WHERE com_job =  '"+com_job.com_job+"'";
+            +"SET com_job='"+com_job.com_job+"' ,com_job_province = '"+com_job.com_job_province+"',"
+            +"com_job_name'"+com_job.com_job_name+"'",
+            +"com_job_city='"+com_job.com_job_city+"', com_job_salary='"+ com_job.com_job_salary+"',"
+            +"com_job_num='"+com_job.com_job_num+"',com_job_status='"+com_job.com_job_status+"',"
+            +"com_job_edu='"+com_job.com_job_edu+"',com_job_exp='"+com_job.com_job_exp+"',"
+            +"com_job_type='"+com_job.com_job_type+"',com_job_desc='"+com.com_job.com_job_desc+"',"
+            +"com_job_publish_time='"+com_job.com_job_publish_time+"',com_job_addr="+com_job.com_job_addr+"'"
+            +" WHERE com_job_id =  '"+com_job.com_job_id+"'";
             
             await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.UPDATE });   
      
@@ -125,7 +130,7 @@ module.exports = {
 
          let sql="SELECT * "+
             "FROM  com_job" 
-            +"WHERE com_job_id='"+com_job_id+"'"
+            +" WHERE com_job_id='"+com_job_id+"'";
         let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
 
         if (result.length > 0) {
@@ -146,7 +151,7 @@ module.exports = {
 
         let sql="SELECT * "+
             "FROM  com_job" 
-            +"WHERE com_user_phone='"+com_user_phone+"'"
+            +" WHERE com_user_phone='"+com_user_phone+"'";
         let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
 
         if (result.length > 0) {

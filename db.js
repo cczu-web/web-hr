@@ -158,7 +158,7 @@ let com_job = sequelize.define('com_job', {
     com_job_desc: Sequelize.TEXT('long'),
     com_job_status:Sequelize.TEXT('tiny'),
     com_job_publish_time: Sequelize.DATE,
-
+    
 }, {
         timestamps: false
     }
