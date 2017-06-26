@@ -129,7 +129,7 @@ let coms = sequelize.define('coms', {
     com_capital: Sequelize.INTEGER(11),
     com_province: Sequelize.STRING(20),
     com_city: Sequelize.STRING(20),
-    com_county: Sequelize.STRING(20),
+    com_country: Sequelize.STRING(20),
     com_addr: Sequelize.STRING(40),
     com_desc: Sequelize.TEXT('long'),
     com_verify:Sequelize.TEXT('tiny'),
@@ -155,7 +155,7 @@ let com_job = sequelize.define('com_job', {
     com_job_type:Sequelize.TEXT('tiny'),
     com_job_desc: Sequelize.TEXT('long'),
     com_job_publish_time: Sequelize.DATE,
-
+    
 }, {
         timestamps: false
     }
