@@ -78,7 +78,9 @@ router
   //确认一个职位
   //取消一个职位
   .get('job/:act/:id', async (ctx, next) => {
+  
        await seekerservice.r_seeker_one_job(ctx);
+
   })
 
 

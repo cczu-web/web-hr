@@ -30,7 +30,9 @@ router
    * 基本信息注册seeker_step，com_step
    */
   .post('register/:step', async (ctx, next) => {
+
     await indexservice.r_seekerRegister(ctx);
+
   })
 
   .get('*', async (ctx, next) => {
@@ -54,5 +56,6 @@ router
 .get('seeker_info/:id',async(ctx,next)=>{
   
   })
+
 
   module.exports = router;

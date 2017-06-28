@@ -27,10 +27,8 @@ module.exports = {
    
     /**
      * 一个申请者所有的已经申请的职位
-     * 
-     * @method getCom_all_job
-     * @param  com_user_phone
-     * 
+     * 更新招聘者招聘状态
+     * 让他们再确认一遍招聘条件
      */
     getSome_seek_job: async (com_user_phone,com_job_id) => {
        let sql="select * from seek_job sj,com_job cj "
@@ -63,6 +61,17 @@ module.exports = {
 
         if (result.length > 0) return result[0].seek_job_id;
         else return false;
+}
+    updateAll_seeker_status: async (com_user_phone,com_job_id) => {
+       
+     
+    },
+
+    /**
+     * 更新求职者状态
+     */
+     update_seeker_status: async (com_user_phone,com_job_id,seeker_phone) => {
+       
      
     },
     //获得一条简历

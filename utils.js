@@ -72,6 +72,15 @@ let getCombyCTX = (ctx) => {
     com.com_scale = ctx.request.body.com_scale;
     com.com_website = ctx.request.body.com_website;
     return com;
+
+}
+
+let getCom_jobbyCTX =(ctx) =>{
+    let com_job={};
+
+
+    return com_job;
+
 }
 
 
@@ -80,4 +89,6 @@ module.exports = {
     formatDateTime,
     getSeekerbyCTX,
     getCombyCTX,
+    getCom_jobbyCTX,
+
 };
