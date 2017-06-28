@@ -74,14 +74,13 @@ router
   })
 
 
-  //更新公司信息；更新发布的招聘信息
+  //发布的招聘信息
   .post('publish/:way', async (ctx, next) => {
     await comservice.r_com_publish_job(ctx);
   })
 
 
-   
-
+  
 
   //更新公司信息；更新发布的招聘信息
   .post('update/:way', async (ctx, next) => {

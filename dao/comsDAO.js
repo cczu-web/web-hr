@@ -42,14 +42,14 @@ module.exports = {
     updateCom: async (com) => {
 
         let sql = "UPDATE coms "
-            +"SET com_name='"+com.com_name+"' ,com_hr = '"+com.com_hr+"',"////负责人
-            +"com_img='"+com.com_img+"', com_date='"+ com.com_date+"',"
-            +"com_type='"+com.com_type+"',com_email='"+com.com_email+"',"
-            +"com_tel='"+com.com_tel+"',com_capital='"+com.com_capital+"',"
-            +"com_province='"+com.com_province+"',com_city='"+com.com_city+"',"
-            +"com_country='"+com.com_country+"',com_addr='"+com.com_addr+"',"
-            +"com_desc='"+com.com_desc+"',com_verify='"+com.com_verify+"',"
-            +"com_scale='"+com.com_scale+"',com_website='"+com.com_website+"'"
+            +" SET com_name='"+com.com_name+"' ,com_hr = '"+com.com_hr+"',"////负责人
+            +" com_img='"+com.com_img+"', com_date='"+ com.com_date+"',"
+            +" com_type='"+com.com_type+"',com_email='"+com.com_email+"',"
+            +" com_tel='"+com.com_tel+"',com_capital='"+com.com_capital+"',"
+            +" com_province='"+com.com_province+"',com_city='"+com.com_city+"',"
+            +" com_country='"+com.com_country+"',com_addr='"+com.com_addr+"',"
+            +" com_desc='"+com.com_desc+"',com_verify='"+com.com_verify+"',"
+            +" com_scale='"+com.com_scale+"',com_website='"+com.com_website+"'"
             +" WHERE com_user_phone ='"+com.com_user_phone+"'";
             
             await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.UPDATE });
@@ -108,7 +108,7 @@ module.exports = {
     updateCom_job: async (com_job) => {
         let sql = "UPDATE com_job "
             +"SET com_job='"+com_job.com_job+"' ,com_job_province = '"+com_job.com_job_province+"',"
-            +"com_job_name'"+com_job.com_job_name+"'",
+            +"com_job_name'"+com_job.com_job_name+"',"
             +"com_job_city='"+com_job.com_job_city+"', com_job_salary='"+ com_job.com_job_salary+"',"
             +"com_job_num='"+com_job.com_job_num+"',com_job_status='"+com_job.com_job_status+"',"
             +"com_job_edu='"+com_job.com_job_edu+"',com_job_exp='"+com_job.com_job_exp+"',"

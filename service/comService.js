@@ -14,28 +14,27 @@ module.exports = {
 
         let msg = '账号密码错误';
 
+        let result = false;
+
         if (user_phone == '' || user_pwd == '')
             msg = '请输入账号密码';
+        else
+            result = await userdao.getUser(user_phone, user_pwd, user_role);
 
-
-        let result = await userdao.getUser(user_phone, user_pwd, user_role);
-
+   
         if (result) {
 
             let com = await comdao.getCom(user_phone);
-
 
             //设置cookie
             let cookie_value = Buffer.from(JSON.stringify(com)).toString('base64');
             ctx.cookies.set('com_cookie', cookie_value, { signed: true });
             console.log(`Set com_cookie value: ${cookie_value}`);
 
-            //      msg = '登录成功！手机号为' + user_phone;
-
             ctx.response.redirect('/com/index');
 
         } else {
-            ctx.render('c_index.html', {
+            ctx.render('c_login.html', {
                 msg: msg,
             });
         }
@@ -59,6 +58,7 @@ module.exports = {
             ctx.render('c_info.html', {
                 com: ctx.state.com
             });
+
         }
         else {
 
@@ -79,10 +79,10 @@ module.exports = {
 
         if (way == 'info') {
             let com = UTILS.getCombyCTX(ctx);
-            comdao.updateCom(com);
+            await comdao.updateCom(com);
             let cookie_value = Buffer.from(JSON.stringify(com)).toString('base64');
             ctx.cookies.set('com_cookie', cookie_value, { signed: true });
-            ctx.response.redirect('/com/update/info');
+            ctx.response.redirect('/com/my/info');
 
         } else {
             let com_job = UTILS.getCom_jobbyCTX(ctx);
@@ -116,8 +116,8 @@ module.exports = {
     },
     //选定求职者
     selectSeeker: async (ctx) => {
-          let com = ctx.state.com;
-          ctx.request.body.seeker_user_phone;
+        let com = ctx.state.com;
+        ctx.request.body.seeker_user_phone;
 
     }
 

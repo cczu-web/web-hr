@@ -71,6 +71,7 @@ let getCombyCTX = (ctx) => {
     com.com_verify = ctx.request.body.com_verify;
     com.com_scale = ctx.request.body.com_scale;
     com.com_website = ctx.request.body.com_website;
+    com.com_label = ctx.request.body.com_label;
     return com;
 
 }
