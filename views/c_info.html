@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html><head>
-</script><script type="text/javascript" async="" src="style/js/conversion.js"></script><script src="style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script><style type="text/css"></style>
+<script src="/style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script><style type="text/css"></style>
 <meta content="no-siteapp" http-equiv="Cache-Control">
 <link  media="handheld" rel="alternate">
 <!-- end 云适配 -->
@@ -8,11 +8,11 @@
 <title>基本信息-招聘服务-拉勾网-最专业的互联网招聘平台</title>
 
 
-<link href="style/css/style.css" type="text/css" rel="stylesheet">
-<link href="style/css/external.min.css" type="text/css" rel="stylesheet">
-<link href="style/css/popup.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" src="style/js/jquery.1.10.1.min.js"></script>
-<script src="style/js/jquery.lib.min.js" type="text/javascript"></script>
+<link href="/style/css/style.css" type="text/css" rel="stylesheet">
+<link href="/style/css/external.min.css" type="text/css" rel="stylesheet">
+<link href="/style/css/popup.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/style/js/jquery.1.10.1.min.js"></script>
+<script src="/style/js/jquery.lib.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
 	<div id="header">
     	<div class="wrapper">
     		<a class="logo" href="index.html">
-    			<img width="229" height="43" alt="拉勾招聘-专注互联网招聘" src="style/images/logo.png">
+    			<img width="229" height="43" alt="拉勾招聘-专注互联网招聘" src="/style/images/logo.png">
     		</a>
     		<ul id="navheader" class="reset">
     				<li><a href="index.html">首页</a></li>
@@ -48,20 +48,20 @@
           		
   		<div style="" id="stepTip">
        		<a></a>
-       		<img width="803" height="59" src="style/images/tiponce.jpg">
+       		<img width="803" height="59" src="/style/images/tiponce.jpg">
        	</div>
-        <div class="content_mid">
+        <div  class="content_mid">
         	<dl class="c_section c_section_mid">
                 <dt>
                     <h2><em></em>填写公司信息</h2>
                 </dt>
                 <dd>
-	                <form id="stepForm">
+	                <form id="stepForm" action="/com/update/info" method="post">
 	                	<div class="c_text_1">基本信息为必填项，是求职者加速了解公司的窗口，认真填写吧！</div>
 	                    
 	                    
 	                    <h3>公司名称</h3> <!--必填-->
-	                    <input type="text" placeholder="请输入公司名称" value="" name="com_name" id="com_name" class="valid">	
+	                    <input type="text" placeholder="请输入公司名称" value="{{com.com_name}}" name="com_name" id="com_name" class="valid">	
 	                    
 	                    <h3>公司LOGO</h3> <!--非必填改必填-->
 	                   	<div class="c_logo c_logo_pos">
@@ -79,24 +79,33 @@
 	                    </div>
 	                    
 						<h3>公司负责人</h3>
-	                    <input type="text" placeholder="请输入公司负责人" value="" name="com_hr" id="com_hr">
+	                    <input type="text" placeholder="请输入公司负责人" value="{{com.com_hr}}" name="com_hr" id="com_hr">
+						  <h3>公司成立年份</h3> 
+	                    <input type="text" placeholder="请输入公司成立年份" value="{{com.com_date}}" name="com_date" id="com_date" class="valid">	
 
 	                    <h3>公司号码</h3>
-	                    <input type="text" placeholder="请输入公司号码" value="" name="com_user_phone" id="com_user_phone">
+	                    <input type="text" placeholder="请输入公司号码" value="{{com.com_user_phone}}" name="com_user_phone" id="com_user_phone">
+						<h3>公司电话</h3>
+	                    <input type="text" placeholder="请输入公司电话" value="{{com.com_tel}}" name="com_tel" id="com_tel">
 
 						<h3>公司邮箱</h3>
-	                    <input type="text" placeholder="请输入公司邮箱" value="" name="com_email" id="com_email">
+	                    <input type="text" placeholder="请输入公司邮箱" value="{{com.com_email}}" name="com_email" id="com_email">
 
 	                    <h3>公司网址</h3>
-	                    <input type="text" placeholder="请输入公司网址" value="" name="com_website" id="com_website">
+	                    <input type="text" placeholder="请输入公司网址" value="{{com.com_website}}" name="com_website" id="com_website">
 
 	                    <h3>所在城市</h3>
-	                    <input type="text" placeholder="请输入工作城市，如：北京" name="com_add" id="com_add">	
+	                    <input type="text" placeholder="请输入工作城市，如：北京" value="{{com.com_city}}" name="com_city" id="com_add">	
+						<h3>公司地址</h3>
+	                    <input type="text" placeholder="请输入公司具体地址" value="{{com.com_addr}}" name="com_addr" id="com_add">	
+
+						<h3>公司资产(万)</h3>
+	                    <input type="text" placeholder="请输入公司资产" value="{{com.com_capital}}" name="com_capital" id="com_add">	
 	                    
 	                    <h3>行业领域</h3>
 	                    <div>
-		                    <input type="hidden" value="" name="com_type" id="com_type">
-		                    		                    	<input type="button" value="请选择行业领域" name="select_industry" id="select_industry" class="select">
+		                    <input type="hidden" value="" name="com_label" id="com_label">
+		                    		                    	<input type="button" value="{{com.com_label}}" name="select_industry" id="select_industry" class="select">
 		                    		                    <div class="dn" id="box_industry" style="display: none;">
 		                        <ul class="reset">
 		                        			                        		<li>移动互联网</li>
@@ -130,8 +139,8 @@
 	                    
 	                    <h3>公司规模</h3>
 	                    <div>
-		                    <input type="hidden" value="" name="com_scale" id="com_scale">
-		                    <input type="button" value="请选择公司规模" id="select_scale" class="select">
+		                    <input type="hidden" value="{{com.com_scale}}" name="com_scale" id="com_scale">
+		                    <input type="button" value="{{com.com_scale}}" id="select_scale" class="select">
 		                    <div class="dn" id="box_scale" style="display: none;">
 		                        <ul class="reset">
 		                        			                            	<li>少于15人</li>
@@ -143,27 +152,29 @@
 		                            		                        </ul>
 		                    </div>	
 	                    </div>
+
 	                    
-	                    <h3>发展阶段</h3> 
+	                    <h3>公司类型</h3> 
 	                    <div>
-		                    <input type="hidden" id="com_capital" name="com_capital" value="">
+		                    <input type="hidden" id="com_type" name="com_type" value="">
 		                    <ul class="s_radio clearfix s_radio_ex">
-		                        		                        	<li>未融资</li>
-		                        		                        	<li>天使轮</li>
-		                        		                        	<li>A轮</li>
-		                        		                        	<li>B轮</li>
-		                        		                        	<li>C轮</li>
-		                        		                        	<li>D轮及以上</li>
-		                        		                        	<li>上市公司</li>
+		                        		                        	<li>国有企业</li>
+																	<li >私营企业</li>
+																	<li>有限责任公司</li>
+																	<li>股份有限公司</li>
+																	<li>有限合伙企业</li>
+																	<li>外资公司</li>
+																	
+		                        		                        
 		                        		                    </ul>
 	                    </div>
 	                    
 	                    
 	                    <h3>公司介绍</h3> 
-	                    <textarea placeholder="请简单的描述公司简介、企业文化等" name="com_desc" id="com_desc"></textarea>		
+	                    <textarea placeholder="请简单的描述公司简介、企业文化等" value={{com.com_desc}} name="com_desc" id="com_desc">{{com.com_desc}}</textarea>		
 	                    <span style="display:none;" class="error" id="beError"></span>
-	                    <input type="hidden" id="companyId" name="companyId" value="25927">
-	                    <input type="hidden" id="companyName" name="companyName" value="福建平潭协创进出口贸易有限公司">
+	                  
+	                    <input type="hidden" value="{{com.com_verify}}" name="com_verify">
 	                    <input type="submit" value="保存，完成" id="stepBtn" class="btn_big fr">
 	                </form>
                 </dd>
@@ -177,7 +188,7 @@
 </div>
 <!------------------------------------- end ----------------------------------------->
 
-<script src="style/js/c_info.min.js" type="text/javascript"></script>
+<script src="/style/js/c_info.min.js" type="text/javascript"></script>
 <script>
 var avatar = {};
 avatar.uploadComplate = function( data ){
@@ -205,8 +216,8 @@ avatar.uploadComplate = function( data ){
 		</div>
 	</div>
 
-<script src="style/js/core.min.js" type="text/javascript"></script>
-<script src="style/js/popup.min.js" type="text/javascript"></script>
+<script src="/style/js/core.min.js" type="text/javascript"></script>
+<script src="/style/js/popup.min.js" type="text/javascript"></script>
 
 <!--  -->
 

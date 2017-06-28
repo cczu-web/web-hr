@@ -58,6 +58,7 @@ module.exports = {
             ctx.render('c_info.html', {
                 com: ctx.state.com
             });
+
         }
         else {
 
@@ -78,10 +79,10 @@ module.exports = {
 
         if (way == 'info') {
             let com = UTILS.getCombyCTX(ctx);
-            comdao.updateCom(com);
+            await comdao.updateCom(com);
             let cookie_value = Buffer.from(JSON.stringify(com)).toString('base64');
             ctx.cookies.set('com_cookie', cookie_value, { signed: true });
-            ctx.response.redirect('/com/update/info');
+            ctx.response.redirect('/com/my/info');
 
         } else {
             let com_job = UTILS.getCom_jobbyCTX(ctx);
