@@ -51,8 +51,10 @@ router
 })
 
 //查看个人简历
-.get('seeker_info/:id',async(ctx,next)=>{
+.get('seeker_info',async(ctx,next)=>{
   
-  })
+  //如果是com,可以从数据库查一下，是否在求职者列表中
+})
+
 
   module.exports = router;
