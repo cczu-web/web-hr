@@ -61,7 +61,8 @@ module.exports = {
 
         if (result.length > 0) return result[0].seek_job_id;
         else return false;
-}
+    
+},
     updateAll_seeker_status: async (com_user_phone,com_job_id) => {
        
      
