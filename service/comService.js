@@ -1,11 +1,13 @@
 
 var db = require('../db');
 let userdao = require('../dao/usersDAO');
-
+let comdao = require('../dao/comsDAO');
+let seek_jobDAO = require('../dao/seek_jobDAO');
+let UTILS = require('../utils');
 module.exports = {
 
-//登陆
-loginValid: async (ctx)=>{
+    //登陆
+    loginValid: async (ctx) => {
         let user_phone = ctx.request.body.user_phone;
         let user_pwd = ctx.request.body.user_pwd;
         let user_role = 2;
@@ -20,92 +22,103 @@ loginValid: async (ctx)=>{
 
         if (result) {
 
-            let user = result;
+            let com = await comdao.getCom(user_phone);
 
-            user.user_pwd = '';
 
             //设置cookie
-            let cookie_value = Buffer.from(JSON.stringify(user)).toString('base64');
-            // ctx.cookies.set('admin_cookie', cookie_value, { signed: true, maxAge: 60 * 60 * 1000 });
+            let cookie_value = Buffer.from(JSON.stringify(com)).toString('base64');
             ctx.cookies.set('com_cookie', cookie_value, { signed: true });
             console.log(`Set com_cookie value: ${cookie_value}`);
 
-            msg = '登录成功！手机号为' + user_phone;
+            //      msg = '登录成功！手机号为' + user_phone;
 
-          ctx.render('index.html', {
-                msg: msg,
-            });
+            ctx.response.redirect('/com/index');
 
         } else {
-            ctx.render('index.html', {
+            ctx.render('c_index.html', {
                 msg: msg,
             });
         }
- },
+    },
+
+    r_comIndex: async (ctx) => {
+
+        let com = ctx.state.com;
+
+        ctx.render('c_index.html', {
+            com: com,
+
+        });
+    },
+
+    //如果传的info，那么更新info
+    r_com_my: async (ctx) => {
+        let way = ctx.params.way;
+        let com = ctx.state.com;
+        if (way == 'info') {
+            ctx.render('c_info.html', {
+                com: ctx.state.com
+            });
+        }
+        else {
+
+            let jobs = comdao.getAllCom_job(com.com_user_phone);
+            ctx.render('c_all_job.html', {
+                jobs: jobs
+            });
+
+        }
+    },
 
 
 
- //公司初步注册(插入手机号和密码)
- com_user_initial_register:async (ctx)=>{
+    //公司信息更新，公司招聘信息更新
+    //info,job
+    r_com_update: async (ctx) => {
+        let way = ctx.params.way;
 
-  let user_phone=ctx.request.body.user_phone;
-  let user_pwd=ctx.request.body.user_pwd;
+        if (way == 'info') {
+            let com = UTILS.getCombyCTX(ctx);
+            comdao.updateCom(com);
+            let cookie_value = Buffer.from(JSON.stringify(com)).toString('base64');
+            ctx.cookies.set('com_cookie', cookie_value, { signed: true });
+            ctx.response.redirect('/com/update/info');
 
-   await db.users.create({
-     user_phone: user_phone,
-     user_pwd: user_pwd,
-     user_role:2,
-   });
-     ctx.render('index.html',  {
-    // msg:' 注册成功'+user_phone,
-     });
- },
-
-
-
-
- //查询公司是否存在
- com_user_phone_Valid:async (user_phone,user_pwd)=>{
-   let sql = "select * from users "
-   +"where(user_phone='"+user_phone+"')" +"and user_pwd = '"+ user_pwd +"'"
-
-   let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
-
-        if(result.length>0){
-            return false;
-        }else{
-            return true;
+        } else {
+            let com_job = UTILS.getCom_jobbyCTX(ctx);
+            comdao.updateCom_job(com_job);
+            seek_jobDAO.updateAll_seeker_status(com_user_phone, com_job.com_job_id);
+            ctx.response.redirect('/job_info/' + com_job.com_job_id);
         }
 
+
     },
-   //添加公司信息,coms
-   r_insertCom:async(ctx)=>{
 
-   },
-   //获取当前公司信息,coms
-   r_getCom:async(com_user_phone)=>{
+    //发布职位
+    r_com_publish_job: async (ctx) => {
+        let job = UTILS.getCom_jobbyCTX(ctx);
 
-   },
-   //更新公司信息,coms
-   r_updateCom:async(ctx)=>{
+        comdao.insertCom_job(com_job);
+        ctx.response.redirect('/job_info/' + com_job.com_job_id);
 
-   },
-   //添加一条公司招聘信息
-   r_insertCom_job:async(ctx,com_user_phone)=>{
 
-   },
-   //获取一条招聘信息
-   getCom_job:async(com_job_id)=>{
+    },
+    //获取一个职位的所有申请信息
+    getAllSeeks_job: async (ctx) => {
+        let com = ctx.state.com;
+        let com_job_id = ctx.params.id;
+        let seekers = seek_jobDAO.getAll_seek_job(com.com_user_phone, com_job_id)
+        ctx.render('c_seekers.html', {
+            com: com,
+            seekers: seekers
 
-   },
-   //获取当前公司的所有招聘信息
-   getAllCom_job:async(com_user_phone)=>{
+        });
+    },
+    //选定求职者
+    selectSeeker: async (ctx) => {
+          let com = ctx.state.com;
+          ctx.request.body.seeker_user_phone;
 
-   },
-   //获取一个职位的所有申请信息
-   getAllSeek_job:async(com_job_id)=>{
-
-   },
-   //查看一个职位其中一个申请人的具体
+    }
 
 }

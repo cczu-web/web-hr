@@ -169,7 +169,9 @@ let seek_job = sequelize.define('seek_job', {
     com_job_id: Sequelize.INTEGER(11),
     seeker_phone: Sequelize.STRING(20),
     seek_time: Sequelize.DATE,
+    end_time:Sequelize.DATE,
     seek_job_verify: Sequelize.TEXT('tiny'),
+  
 
 
 }, {

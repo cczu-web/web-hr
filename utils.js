@@ -74,10 +74,18 @@ let getCombyCTX = (ctx) => {
     return com;
 }
 
+let getCom_jobbyCTX =(ctx) =>{
+    let com_job={};
+
+
+    return com_job;
+}
+
 
 module.exports = {
     parse,
     formatDateTime,
     getSeekerbyCTX,
     getCombyCTX,
+    getCom_jobbyCTX,
 };

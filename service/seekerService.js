@@ -37,7 +37,10 @@ module.exports = {
             ctx.response.redirect('/seeker/index');
 
         } else {
-            ctx.response.redirect('/seeker/login');
+               ctx.render('s_login.html', {
+                   msg : msg
+
+      });
         }
 
     },
