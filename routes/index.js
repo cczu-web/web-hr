@@ -6,7 +6,7 @@
 
 var router = require('koa-router')();
 const UTILS = require('../utils');
-
+let indexservice = require('../service/indexService.js');
 router
   .get('/', async (ctx, next) => {
 
@@ -30,7 +30,9 @@ router
    * 基本信息注册seeker_step，com_step
    */
   .post('register/:step', async (ctx, next) => {
-    await seekerservice.r_seekerRegister(ctx);
+
+    await indexservice.r_seekerRegister(ctx);
+
   })
 
   .get('*', async (ctx, next) => {
@@ -51,10 +53,9 @@ router
 })
 
 //查看个人简历
-.get('seeker_info',async(ctx,next)=>{
+.get('seeker_info/:id',async(ctx,next)=>{
   
-  //如果是com,可以从数据库查一下，是否在求职者列表中
-})
+  })
 
 
   module.exports = router;
