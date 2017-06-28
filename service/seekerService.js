@@ -1,6 +1,7 @@
 var db = require('../db');
 let userdao = require('../dao/usersDAO');
 let seekerdao = require('../dao/seekersDAO');
+let seek_jobDAO=require('../dao/seek_jobDAO');
 let UTILS = require('../utils');
 module.exports = {
 
@@ -100,7 +101,7 @@ module.exports = {
 
         else if (way == 'edu') {
 
-            let seeker_edu;
+            let seeker_edu={};
             seeker_edu.seeker_edu_id = ctx.request.body.seeker_edu_id;
             seeker_edu.seeker_edu_start = ctx.request.body.seeker_edu_start;
             seeker_edu.seeker_edu_end = ctx.request.body.seeker_edu_end;
@@ -113,7 +114,7 @@ module.exports = {
         }
 
         else if (way == 'exp') {
-            let seeker_exp;
+            let seeker_exp={};
 
             seeker_exp.seeker_exp_id = ctx.request.body.seeker_exp_id
             seeker_exp.seeker_exp_start = ctx.request.body.seeker_exp_start
@@ -141,21 +142,53 @@ module.exports = {
 
         ctx.response.redirect('/seeker/index');
     },
-
-
+   //对职位进行操作，增，删，修改
+   r_seeker_one_job:async(ctx)=>{
+        let act=ctx.params.act;
+        let id=ctx.params.id;
+        if(act=='insert') 
+        {
+            let seek_job={};
+            seek_job.com_job_id=id;//ctx.request.body.com_job_id;
+            seek_job.seeker_phone=ctx.state.seeker.seeker_user_phone;//ctx.request.body.seeker_phone;
+            seek_job.seek_time=new Date();
+            seek_job.seek_job_verify=2;
+           let seek_job_id= await seek_jobDAO.insertSeek_job(seek_job);//此处逻辑如何搭建，插入数据库之后
+           let seek_job_info=await seek_jobDAO.getOneSeek_job(seek_job_id);
+              ctx.render('s_seek_info.html', {
+              seek_job_info:seek_job_info,
+          });
+        }
+        else if(act=='update'){//是否确认更新的招聘消息
+            let seek_job_verify=0;
+            await seek_jobDAO.updateOneSeek_job(id,seek_job_verify);
+            let seek_job_info=await seek_jobDAO.getOneSeek_job(id);
+                ctx.render('s_seek_info.html', {
+              seek_job_info:seek_job_info,
+          });
+        }
+        else if(act=='delete'){
+            let seek_job_verify=-1;
+            await seek_jobDAO.updateOneSeek_job(id,seek_job_verify);
+                let seek_job_info=await seek_jobDAO.getOneSeek_job(id);
+                ctx.render('s_seek_info.html', {
+              seek_job_info:seek_job_info,
+          });
+        }
+   },
 
     //查看所有已经申请的职位
     r_seeker_all_job: async (ctx) => {
 
         let seeker = ctx.state.seeker;
-        seeker.seeker_user_phone;
+       // seeker.seeker_user_phone;
 
         //     let jobs = await 
-
+         let jobs= await seek_jobDAO.getSome_seek_job(seeker.seeker_user_phone);
 
         ctx.render('s_jobs.html', {
             seeker: seeker,
-
+            jobs:jobs,
         });
 
     },

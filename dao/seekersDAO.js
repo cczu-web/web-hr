@@ -275,7 +275,7 @@ module.exports = {
      */
     deleteSeeker_edu: async (seeker_edu_id) => {
 
-        let sql = "DELETE FROM seekers_edu WHERE seeker_edu_id = " + seeker_edu_id;
+        let sql = "DELETE FROM seekers_edu WHERE seeker_edu_id = '" + seeker_edu_id+"'";
         await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.DELETE });
 
     },
@@ -290,7 +290,7 @@ module.exports = {
      */
     deleteSeeker_exp: async (seeker_exp_id) => {
 
-        let sql = "DELETE FROM seekers_exp WHERE seeker_exp_id = " + seeker_exp_id;
+        let sql = "DELETE FROM seekers_exp WHERE seeker_exp_id = '" + seeker_exp_id+"'";
         await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.DELETE });
 
     },

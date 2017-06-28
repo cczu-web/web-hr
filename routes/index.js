@@ -6,7 +6,7 @@
 
 var router = require('koa-router')();
 const UTILS = require('../utils');
-
+let indexservice = require('../service/indexService.js');
 router
   .get('/', async (ctx, next) => {
 
@@ -30,7 +30,7 @@ router
    * 基本信息注册seeker_step，com_step
    */
   .post('register/:step', async (ctx, next) => {
-    await seekerservice.r_seekerRegister(ctx);
+    await indexservice.r_seekerRegister(ctx);
   })
 
   .get('*', async (ctx, next) => {

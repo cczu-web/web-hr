@@ -34,7 +34,7 @@ module.exports = {
 
         }
         else if (step == 'seeker_step') {
-            await seekerResgister_step2(ctx);
+            await  seekerResgister_step2(ctx);
 
         }
         else if (step == 'com_step') {
