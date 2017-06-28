@@ -135,6 +135,7 @@ let coms = sequelize.define('coms', {
     com_verify:Sequelize.TEXT('tiny'),
     com_scale:Sequelize.STRING(30),
     com_website: Sequelize.STRING(40),
+     com_label: Sequelize.STRING(40),
 
 
 }, {

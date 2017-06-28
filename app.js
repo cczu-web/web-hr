@@ -23,7 +23,7 @@ const admin = require('./routes/admin');
 const seeker = require('./routes/seeker');
 
 const com = require('./routes/com');
-const test = require('./routes/test');
+
 
 //const users = require('./routes/users');
 //const api = require('./routes/api');
@@ -80,7 +80,7 @@ router.use('/admin/', admin.routes(), admin.allowedMethods());
 
 router.use('/seeker/', seeker.routes(),seeker.allowedMethods());
 router.use('/com/', com.routes(), com.allowedMethods());
-router.use('/test/', test.routes(), test.allowedMethods());
+
 //router.use('/user', users.routes(), users.allowedMethods());
 //router.use('/api', api.routes(), api.allowedMethods());
 

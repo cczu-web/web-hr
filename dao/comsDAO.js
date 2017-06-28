@@ -108,7 +108,7 @@ module.exports = {
     updateCom_job: async (com_job) => {
         let sql = "UPDATE com_job "
             +"SET com_job='"+com_job.com_job+"' ,com_job_province = '"+com_job.com_job_province+"',"
-            +"com_job_name'"+com_job.com_job_name+"'",
+            +"com_job_name'"+com_job.com_job_name+"',"
             +"com_job_city='"+com_job.com_job_city+"', com_job_salary='"+ com_job.com_job_salary+"',"
             +"com_job_num='"+com_job.com_job_num+"',com_job_status='"+com_job.com_job_status+"',"
             +"com_job_edu='"+com_job.com_job_edu+"',com_job_exp='"+com_job.com_job_exp+"',"
