@@ -45,17 +45,21 @@ router
 
   //获取查看一条职位信息
 .get('job_info/:id',async(ctx,next)=>{
-  
+    await indexservice.r_JobInfo(ctx);
+   
   })
 //查看公司信息
 .get('com_info/:id',async(ctx,next)=>{
-  
+  await indexservice.r_com_info(ctx);
 })
 
-//查看个人简历
+//查看个人简历，此处id代表的是什么
 .get('seeker_info/:id',async(ctx,next)=>{
-  
-  })
-
+  await indexservice.r_one_seekInfo(ctx);
+})
+//搜索职位信息
+.post('searchJob',async(ctx,next)=>{
+    await indexservice.r_search_job(ctx);
+})
 
   module.exports = router;

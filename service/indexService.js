@@ -2,6 +2,7 @@ let userdao = require('../dao/usersDAO');
 let admindao = require('../dao/adminDAO');
 let seekerdao = require('../dao/seekersDAO');
 let comdao = require('../dao/comsDAO');
+let seek_jobDAO = require('../dao/seek_jobDAO');
 let UTILS = require('../utils');
 
 module.exports = {
@@ -73,6 +74,33 @@ module.exports = {
         ctx.response.redirect('/com/index');
 
     },
-
-
+      //查看一条职位信息
+     r_JobInfo:async(ctx)=>{
+         let job_id=ctx.params.id;
+         let jobInfo =await comdao.getCom_job(job_id);
+         ctx.render('job_info.html',{
+        jobInfo:jobInfo,
+     });
+    } ,
+     //查看一家公司的信息
+    r_com_info:async(ctx)=>{
+        let com_id=ctx.params.id;
+        let comInfo =await comdao.getCom(com_id);
+        ctx.render('com_info.html',{
+           comInfo:comInfo,
+        })
+    },
+     //查看个人简历,是否具有修改求职者的权限 
+    r_one_seekInfo:async(ctx)=>{
+        let seek_job_id=ctx.params.id;
+        let seekInfo=await seek_jobDAO.getOneSeekerInfo(seek_job_id);
+        ctx.render('seekerInfo.html',{
+          seekInfo:seekInfo,
+        });
+    },
+    //求职者搜索职位信息
+    r_search_job:async(ctx)=>{
+        let searchStr=ctx.request.body.searchStr;
+        
+    }
 }

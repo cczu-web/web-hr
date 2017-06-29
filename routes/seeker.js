@@ -73,6 +73,10 @@ router
   .get('myjob', async (ctx, next) => {
     await seekerservice.r_seeker_all_job(ctx);
   })
+  //获取一个已申请的职位信息
+  .get('seek_job/:id',async(ctx,next)=>{
+    await seekerservice.r_seek_job_info(ctx);
+  })
 
   //申请一个职位
   //确认一个职位
