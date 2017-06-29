@@ -1,4 +1,4 @@
-var db = require('../db');
+let db = require('../db');
 let userdao = require('../dao/usersDAO');
 let seekerdao = require('../dao/seekersDAO');
 let seek_jobDAO=require('../dao/seek_jobDAO');
@@ -39,6 +39,7 @@ module.exports = {
 
         } else {
                ctx.render('s_login.html', {
+                   nowUser:'seeker',
                    msg : msg
 
       });
@@ -47,7 +48,7 @@ module.exports = {
     },
 
 
-   //求职者首页
+
     r_seekerIndex: async (ctx) => {
 
         let seeker = ctx.state.seeker;
@@ -56,12 +57,23 @@ module.exports = {
         let seeker_exp = await seekerdao.getSeeker_all_exp(seeker.seeker_user_phone);
 
         ctx.render('s_index.html', {
+            nowUser:'seeker',
             seeker: seeker,
             seeker_edu: seeker_edu,
             seeker_exp: seeker_exp,
         });
     },
 
+r_seekerInfo: async (ctx) => {
+     let seeker = ctx.state.seeker;
+     seeker = await seekerdao.getSeeker(seeker.seeker_user_phone);
+
+      ctx.render('s_info.html', {
+            nowUser:'seeker',
+            seeker: seeker,
+            
+        });
+},
     /**
      * info 更新个人信息
      * expect 更新期望职业信息
@@ -155,16 +167,37 @@ module.exports = {
             seek_job.seeker_phone=ctx.state.seeker.seeker_user_phone;//ctx.request.body.seeker_phone;
             seek_job.seek_time=new Date();
             seek_job.seek_job_verify=2;
-            let seek_job_id= await seek_jobDAO.insertSeek_job(seek_job);//此处逻辑如何搭建，插入数据库之后
+
+           let seek_job_id= await seek_jobDAO.insertSeek_job(seek_job);//此处逻辑如何搭建，插入数据库之后
+           let seek_job_info=await seek_jobDAO.getOneSeek_job(seek_job_id);
+              ctx.render('s_seek_info.html', {
+                  nowUser:'seeker',
+              seek_job_info:seek_job_info,
+          });
+
 
         }
         else if(act=='update'){//是否确认更新的招聘消息
             let seek_job_verify=0;
             await seek_jobDAO.updateOneSeek_job(id,seek_job_verify);
+
+            let seek_job_info=await seek_jobDAO.getOneSeek_job(id);
+                ctx.render('s_seek_info.html', {
+                    nowUser:'seeker',
+              seek_job_info:seek_job_info,
+          });
+
         }
         else if(act=='delete'){
             let seek_job_verify=-1;
             await seek_jobDAO.updateOneSeek_job(id,seek_job_verify);
+
+                let seek_job_info=await seek_jobDAO.getOneSeek_job(id);
+                ctx.render('s_seek_info.html', {
+                    nowUser:'seeker',
+              seek_job_info:seek_job_info,
+          });
+
         }
           ctx.response.redirect('/seeker/seek_job');
    },
@@ -183,6 +216,9 @@ module.exports = {
          let jobs= await seek_jobDAO.getSome_seek_job(seeker.seeker_user_phone);
 
         ctx.render('s_jobs.html', {
+
+            nowUser:'seeker',
+            seeker: seeker,
             jobs:jobs,
         });
 

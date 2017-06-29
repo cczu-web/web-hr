@@ -244,8 +244,8 @@ ul.hot_pos i{width: 12px;height: 14px;position:absolute;background:url(img/hot.p
 .login_box_btm{background: url(img/login_btm.png) repeat-x; height:10px;}
 #loginForm{width:360px; margin:0; border-right:1px dashed #999; float:left;}
 #loginForm a{color:#019875; }
-#loginForm input#user_phone{width:296px;font-size:16px; color:#777; border:none;}
-#loginForm input#user_pwd{width:296px;font-size:16px; color:#777;  border:none;}
+#loginForm input#email{width:296px;font-size:16px; color:#777; border:none;}
+#loginForm input#password{width:296px;font-size:16px; color:#777;  border:none;}
 #loginForm input:focus{border:2px solid #fff;-webkit-box-shadow: 0px 0px 4px #b5f0e7;-moz-box-shadow: 0px 0px 4px #b5f0e7;box-shadow: 0px 0px 4px #b5f0e7;}
 #loginForm .fr{color:#777; margin-right:45px;}
 #loginForm .fr:hover{color:#019875;}

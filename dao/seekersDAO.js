@@ -17,7 +17,7 @@ module.exports = {
             seeker_name: seeker.seeker_name,
             seeker_img: seeker.seeker_img,
             seeker_sex: seeker.seeker_sex,
-            seeker_join: seeker.seeker_join,
+            seeker_exp: seeker.seeker_exp,
             seeker_hukou: seeker.seeker_hukou,
             seeker_living: seeker.seeker_living,
             seeker_email: seeker.seeker_email,
@@ -27,6 +27,7 @@ module.exports = {
             seeker_salary: seeker.seeker_salary,
             seeker_self: seeker.seeker_self,
             seeker_now: seeker.seeker_now,
+            seeker_edu :seeker.seeker_edu,
         });
 
     },

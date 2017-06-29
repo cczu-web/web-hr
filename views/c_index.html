@@ -1,54 +1,6 @@
-<!DOCTYPE HTML>
-<html>
-
-<head>
-	<script src="/style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script>
-	<meta content="no-siteapp" http-equiv="Cache-Control">
-	<link media="handheld" rel="alternate">
-	<!-- end 云适配 -->
-	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-	<title>{{com.com_name}}</title>
-
-	<link href="/style/css/style.css" type="text/css" rel="stylesheet">
-	<link href="/style/css/external.min.css" type="text/css" rel="stylesheet">
-	<link href="/style/css/popup.css" type="text/css" rel="stylesheet">
-	<script type="text/javascript" src="/style/js/jquery.1.10.1.min.js"></script>
-	<script src="/style/js/jquery.lib.min.js" type="text/javascript"></script>
-</head>
-
-<body>
-	<div id="body">
-		<div id="header">
-			<div class="wrapper">
-				<a class="logo" href="index.html">
-    			<img width="229" height="43" alt="拉勾招聘-专注互联网招聘" src="/style/images/logo.png">
-    		</a>
-				<ul id="navheader" class="reset">
-					<li><a href="index.html">首页</a></li>
-					<li class="current"><a href="companylist.html">公司</a></li>
-					<li><a href="list.html">求职</a></li>
-					<li><a rel="nofollow" href="">简历管理</a></li>
-					<li><a rel="nofollow" href="/com/publish/job">发布职位</a></li>
-
-				</ul>
-				<dl class="collapsible_menu">
-					<dt>
-						<span>{{com.com_name}}</span>
-						<span class="red dn" id="noticeDot-1"></span>
-						<i></i>
-					</dt>
-					<dd><a href="positions.html">我发布的职位</a></dd>
-					<dd><a href="">我收到的简历</a></dd>
-					<dd class="btm"><a href="myhome.html">我的公司主页</a></dd>
-					<dd><a href="jianli.html">我要找工作</a></dd>
-					<dd><a href="accountBind.html">帐号设置</a></dd>
-					<dd class="logout"><a rel="nofollow" href="login.html">退出</a></dd>
-				</dl>
-			</div>
-		</div>
-		<!-- end #header -->
+{% extends "base.html" %} {% block main %}
 		<div id="container">
-			<!-- <script src="/style/js/swfobject_modified.js" type="text/javascript"></script> -->
+
 			<div class="clearfix">
 
 				<div class="content_l">
@@ -61,16 +13,6 @@
 	                        </a>
 						</div>
 
-						<!--  			                <div class="c_logo" style="background-color:#fff;">
-			                	<div id="logoShow">
-			                		<img src="/style/images/logo_default.png" width="190" height="190" alt="公司logo" />
-		                        	<span>更换公司图片<br />190px*190px 小于5M</span>
-		                        </div>
-		                        <input onchange="img_check(this,'http://www.lagou.com/cd/saveProfileLogo.json',25927,'logo');" type="file" id="logo" name="logo" title="支持jpg、jpeg、gif、png格式，文件小于5M" />
-			                     
-			                </div>
-		                    <span class="error" id="logo_error" style="display:none;"></span>
-						     -->
 
 						<div class="c_box companyName">
 							<h2 title="{{com.com_name}}">{{com.com_name}}</h2>
@@ -435,11 +377,11 @@
 
 				</div>
 
-				<!-------------------------------------弹窗lightbox  ----------------------------------------->
+			
 				<div style="display:none;">
 
 				</div>
-				<!------------------------------------- end ----------------------------------------->
+		
 
 				<script src="/style/js/c_index.min.js" type="text/javascript"></script>
 				<script>
@@ -454,55 +396,9 @@
 
 				</script>
 				<div class="clear"></div>
-				<input type="hidden" value="d1035b6caa514d869727cff29a1c2e0c" id="resubmitToken">
+			
 				<a rel="nofollow" title="回到顶部" id="backtop" style="display: inline;"></a>
 			</div>
 			<!-- end #container -->
-		</div>
-		<!-- end #body -->
-		<div id="footer">
-			<div class="wrapper">
-				<a rel="nofollow" target="_blank" href="about.html">联系我们</a>
-				<a target="_blank" href="http://www.htmlsucai.com">互联网公司导航</a>
-				<a rel="nofollow" target="_blank" href="http://www.htmlsucai.com">拉勾微博</a>
-				<a rel="nofollow" href="javascript:void(0)" class="footer_qr">拉勾微信<i></i></a>
-				<div class="copyright">&copy;2013-2014 Lagou <a href="http://www.htmlsucai.com" target="_blank">京ICP备14023790号-2</a></div>
-			</div>
-		</div>
-
-		<script src="/style/js/core.min.js" type="text/javascript"></script>
-		<script src="/style/js/popup.min.js" type="text/javascript"></script>
-
-		<!--  -->
-
-
-		<div id="cboxOverlay" style="display: none;"></div>
-		<div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;">
-			<div id="cboxWrapper">
-				<div>
-					<div id="cboxTopLeft" style="float: left;"></div>
-					<div id="cboxTopCenter" style="float: left;"></div>
-					<div id="cboxTopRight" style="float: left;"></div>
-				</div>
-				<div style="clear: left;">
-					<div id="cboxMiddleLeft" style="float: left;"></div>
-					<div id="cboxContent" style="float: left;">
-						<div id="cboxTitle" style="float: left;"></div>
-						<div id="cboxCurrent" style="float: left;"></div><button type="button" id="cboxPrevious"></button><button type="button" id="cboxNext"></button><button id="cboxSlideshow"></button>
-						<div
-						 id="cboxLoadingOverlay" style="float: left;"></div>
-					<div id="cboxLoadingGraphic" style="float: left;"></div>
-				</div>
-				<div id="cboxMiddleRight" style="float: left;"></div>
-			</div>
-			<div style="clear: left;">
-				<div id="cboxBottomLeft" style="float: left;"></div>
-				<div id="cboxBottomCenter" style="float: left;"></div>
-				<div id="cboxBottomRight" style="float: left;"></div>
-			</div>
-		</div>
-		<div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div>
-	</div>
-</body>
-
-</html>
+	
+{% endblock %}
