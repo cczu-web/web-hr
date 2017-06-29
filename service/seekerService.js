@@ -48,6 +48,7 @@ module.exports = {
     },
 
 
+
     r_seekerIndex: async (ctx) => {
 
         let seeker = ctx.state.seeker;
@@ -63,6 +64,16 @@ module.exports = {
         });
     },
 
+r_seekerInfo: async (ctx) => {
+     let seeker = ctx.state.seeker;
+     seeker = await seekerdao.getSeeker(seeker.seeker_user_phone);
+
+      ctx.render('s_info.html', {
+            nowUser:'seeker',
+            seeker: seeker,
+            
+        });
+},
     /**
      * info 更新个人信息
      * expect 更新期望职业信息
@@ -163,6 +174,7 @@ module.exports = {
                   nowUser:'seeker',
               seek_job_info:seek_job_info,
           });
+
 
         }
         else if(act=='update'){//是否确认更新的招聘消息

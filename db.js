@@ -55,8 +55,8 @@ let seekers = sequelize.define('seekers', {
     seeker_user_phone: { type: Sequelize.INTEGER(11), primaryKey: true },
     seeker_name: Sequelize.STRING(20),
     seeker_img : Sequelize.STRING(100),
-    seeker_sex: Sequelize.TEXT('tiny'),
-    seeker_join: Sequelize.INTEGER(4),
+    seeker_sex: Sequelize.STRING(10),
+    seeker_exp: Sequelize.STRING(20),
     seeker_hukou: Sequelize.STRING(40),
     seeker_living: Sequelize.STRING(40),
     seeker_email: Sequelize.STRING(40),
@@ -66,6 +66,7 @@ let seekers = sequelize.define('seekers', {
     seeker_salary: Sequelize.STRING(30),
     seeker_self: Sequelize.TEXT('long'),
     seeker_now:Sequelize.TEXT('tiny'),
+    seeker_edu: Sequelize.STRING(45),
 }, {
         timestamps: false
     }
@@ -155,7 +156,7 @@ let com_job = sequelize.define('com_job', {
     com_job_num: Sequelize.INTEGER(11),
     com_job_edu: Sequelize.STRING(30),
     com_job_exp: Sequelize.STRING(30),
-    com_job_type:Sequelize.TEXT('tiny'),
+    com_job_type:Sequelize.STRING(20),
     com_job_desc: Sequelize.TEXT('long'),
     com_job_status:Sequelize.TEXT('tiny'),
     com_job_publish_time: Sequelize.DATE,
