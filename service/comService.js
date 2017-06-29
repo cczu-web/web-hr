@@ -72,6 +72,19 @@ module.exports = {
 
 
 
+  r_getCom_job: async (ctx) => {
+        let com_job_id = ctx.params.id;
+        let com_job = await comdao.getCom_job(com_job_id );
+
+ ctx.render('c_job.html', {
+                com_job: com_job
+            });
+      
+        
+        
+
+  },
+
     //公司信息更新，公司招聘信息更新
     //info,job
     r_com_update: async (ctx) => {
@@ -87,10 +100,9 @@ module.exports = {
         } else {
             let com_job = UTILS.getCom_jobbyCTX(ctx);
             comdao.updateCom_job(com_job);
-            seek_jobDAO.updateAll_seeker_status(com_user_phone, com_job.com_job_id);
+            seek_jobDAO.updateAll_seeker_status(com_job.com_user_phone, com_job.com_job_id);
             ctx.response.redirect('/job_info/' + com_job.com_job_id);
         }
-
 
     },
 
@@ -99,7 +111,7 @@ module.exports = {
         let job = UTILS.getCom_jobbyCTX(ctx);
 
         comdao.insertCom_job(com_job);
-        ctx.response.redirect('/job_info/' + com_job.com_job_id);
+   //     ctx.response.redirect('/job_info/' + com_job.com_job_id);
 
 
     },

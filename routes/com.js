@@ -50,7 +50,7 @@ router
   .get('index', async (ctx, next) => {
     await comservice.r_comIndex(ctx)
   })
-  //公司信息更新页面info
+  //公司信息页面info
   //公司查看所有招聘信息job
   .get('my/:way', async (ctx, next) => {
 
@@ -75,12 +75,15 @@ router
 
 
   //发布的招聘信息
-  .post('publish/:way', async (ctx, next) => {
+  .post('publish/job', async (ctx, next) => {
     await comservice.r_com_publish_job(ctx);
   })
 
 
-  
+    //更新发布的招聘信息
+  .get('update/job/:id', async (ctx, next) => {
+    await comservice.r_getCom_job(ctx);
+  })
 
   //更新公司信息；更新发布的招聘信息
   .post('update/:way', async (ctx, next) => {
@@ -88,12 +91,6 @@ router
   })
 
 
-  .get('publish/job', async (ctx, next) => {
-
-    ctx.render('c_job.html', {
-      com: ctx.state.com
-    });
-  })
 
 //公司选定求职者
 
