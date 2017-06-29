@@ -134,7 +134,7 @@ insertTerm_job :async (term_job)=>{
 //增加学历类别表
 insertTerm_edu :async (term_edu)=>{
   await db.term_edu.create({
-     term_edu:term_edu.term_edu,
+     term_edu:term_edu,
   })
 },
 //增加薪水类别表

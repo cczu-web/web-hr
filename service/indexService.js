@@ -78,7 +78,7 @@ module.exports = {
      r_JobInfo:async(ctx)=>{
          let job_id=ctx.params.id;
          let jobInfo =await comdao.getCom_job(job_id);
-         ctx.render('job_info.html',{
+        ctx.render('job_info.html',{
         jobInfo:jobInfo,
      });
     } ,
@@ -101,6 +101,6 @@ module.exports = {
     //求职者搜索职位信息
     r_search_job:async(ctx)=>{
         let searchStr=ctx.request.body.searchStr;
-        
+
     }
 }
