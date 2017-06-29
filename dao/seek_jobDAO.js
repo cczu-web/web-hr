@@ -63,6 +63,7 @@ module.exports = {
         else return false;
     
 },
+  //更新所有求职者的状态
     updateAll_seeker_status: async (com_user_phone,com_job_id) => {
        
      
@@ -75,7 +76,8 @@ module.exports = {
        
      
     },
-    //获得一条简历
+
+    //获得一条职位信息,是否需要公司的部分信息
     getOneSeek_job:async(seek_job_id)=>{
       let sql="select * from seek_job sj,com_job cj "
        +" where sj.com_job_id=cj.com_job_id and sj.seek_job_id='"+seek_job_id+"'";
@@ -87,6 +89,18 @@ module.exports = {
             return false;
         }
     },
+     //查看一份简历,对公司
+     getOneSeekerInfo:async(seek_job_id)=>{
+         "select * from seek_job sj,seekers s"
+       +" where sj.seeker_phone=s.seeker_user_phone and sj.seek_job_id='"+seek_job_id+"'";
+       let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
+       
+        if (result.length > 0) {
+            return result[0];
+        } else {
+            return false;
+        }
+     },
   //修改一条简历或删除一条简历
     updateOneSeek_job:async(seek_job_id,seek_job_verify)=>{
       let sql = "UPDATE seek_job "

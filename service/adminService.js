@@ -73,16 +73,36 @@ module.exports = {
     },
 
     /**
-        * 查询所有企业信息
+        * 查询所有企业信息,求职者信息
         * @method select_allcoms
         * 
         * 
         */
-    select_allcoms :async() => {
+    r_select_allInfo :async() => {
+        let way=ctx.params.way;
+        if (way=='coms'){
+             let coms = admindao.getAllcoms;
+             ctx.render('a_allComs.html',{
+              coms:coms,
+             });
+        }
+        else if(way=='seekers'){
+            let  seekers=admindao.getAllseeker;
+             ctx.render('a_allSeekers.html',{
+                 seekers:seekers,
+             });
+        
+            
+        }
+       
 
-        let coms = admindao.getAllcoms;
 
-
+    },
+    r_addTermInfo:async(ctx)=>{
+        let way=ctx.params.way;
+        if(way=='job'){
+            await admindao.insertTerm_job;
+        }
     },
 
     /**

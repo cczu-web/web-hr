@@ -143,4 +143,46 @@ insertTerm_salary:async (term_salary)=>{
      term_salary:term_salary.term_salary,
   })
 },
+//修改职位类别表
+updateTerm_job :async (term_job)=>{
+       let sql = "UPDATE  term_job"
+            + " SET  term_job='" + term_job.term_job + "' ,parent_id = '" + term_id.parent_id+"'"
+            + " WHERE term_job_id=  '" + term_job_id + "'";
+
+        await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.UPDATE });
+},
+//修改学历类别表
+updateTerm_edu :async (term_edu)=>{
+         let sql = "UPDATE  term_edu"
+            + " SET  term_edu='" + term_edu.term_edu + "'"
+            + " WHERE term_job_id =  '" + term_job_id + "'";
+
+        await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.UPDATE });
+},
+//修改薪水类别表
+updateTerm_salary:async (term_salary)=>{
+          let sql = "UPDATE  term_salary"
+            + " SET  term_salary='" + term_salary.term_salary + "'"
+            + " WHERE term_salary_id =  '" + term_salary_id + "'";
+
+        await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.UPDATE });
+},
+//删除职位类别
+updateTerm_job :async (term_job)=>{
+      
+        let sql = "DELETE FROM term_job WHERE term_job_id = '" + term_job_id+"'";
+
+        await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.DELETE });
+},
+//删除学历类别
+updateTerm_edu :async (term_edu)=>{
+       let sql = "DELETE FROM term_edu WHERE term_edu_id = '" + term_edu_id+"'";
+        await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.DELETE });
+},
+//删除薪水类别
+updateTerm_salary:async (term_salary)=>{
+        let sql = "DELETE FROM term_salary WHERE term_salary_id = '" + term_salary_id+"'";
+
+        await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.DELETE});
+},
 }
