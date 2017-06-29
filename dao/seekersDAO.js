@@ -50,6 +50,7 @@ module.exports = {
         let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
         if (result.length > 0) {
             res = result[0];
+             //console.log(result[0].seeker_edu);
         }
         return res;
     },
