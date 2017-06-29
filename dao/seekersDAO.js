@@ -313,12 +313,15 @@ module.exports = {
 
     },
 
-
+     
     getSeeker_jobs: async (seeker_user_phone) => {
         let sql = "SELECT * FROM ";
 
     },
+    //搜索职位信息
+     search_jobs:async(string)=>{
 
+     }
 
 
 
