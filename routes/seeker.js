@@ -88,7 +88,6 @@ router
   })
 
 
-
   //账号退出
   .get('loginout', async (ctx, next) => {
     ctx.cookies.set('seeker_cookie', '');
