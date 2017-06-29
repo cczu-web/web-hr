@@ -31,7 +31,13 @@ router
       msg: '管理员登录以后的主页',
     });
   })
-
+.get('allinfo/:way',async(ctx,next)=>{
+     await adminservice.r_select_allInfo(ctx);
+  })
+  //增加类别信息
+.get('addTermInfo/:way',async(ctx,next)=>{
+     await adminservice.r_addTermInfo(ctx);
+})
 .get('logout', async (ctx, next) => {
     await  adminservice.logout(ctx);
   })

@@ -47,6 +47,7 @@ module.exports = {
 
     },
 
+
     r_seekerIndex: async (ctx) => {
 
         let seeker = ctx.state.seeker;
@@ -58,7 +59,7 @@ module.exports = {
             nowUser:'seeker',
             seeker: seeker,
             seeker_edu: seeker_edu,
-            seeker_exp: seeker_exp
+            seeker_exp: seeker_exp,
         });
     },
 
@@ -77,12 +78,12 @@ module.exports = {
 
             seeker = UTILS.getSeekerbyCTX(ctx);
 
-            await seeker.updateSeeker(seeker);
+            await seekerdao.updateSeeker(seeker);
 
             //更新cookie
-            //   seeker = await seekerdao.getSeeker(seeker.seeker_user_phone);
             let cookie_value = Buffer.from(JSON.stringify(seeker)).toString('base64');
             ctx.cookies.set('seeker_cookie', cookie_value, { signed: true });
+            ctx.response.redirect('/seeker/index');
         }
 
         else if (way == 'expect') {
@@ -91,7 +92,6 @@ module.exports = {
             seeker.seeker_workcity = ctx.request.body.seeker_workcity;
             seeker.seeker_job = ctx.request.body.seeker_job;
             seeker.seeker_salary = ctx.request.body.seeker_salary;
-            //     console.log("ctx.request.body.seeker_salary" + ctx.request.body.seeker_salary)
 
             await seekerdao.updateSeeker(seeker);
 
@@ -99,7 +99,7 @@ module.exports = {
             seeker = await seekerdao.getSeeker(seeker.seeker_user_phone);
             let cookie_value = Buffer.from(JSON.stringify(seeker)).toString('base64');
             ctx.cookies.set('seeker_cookie', cookie_value, { signed: true });
-
+            
         }
 
         else if (way == 'edu') {
@@ -113,21 +113,21 @@ module.exports = {
             seeker_edu.seeker_edu_education = ctx.request.body.seeker_edu_education;
 
             await seekerdao.updateSeeker_edu(seeker_edu);
-
+             
         }
 
         else if (way == 'exp') {
             let seeker_exp={};
 
-            seeker_exp.seeker_exp_id = ctx.request.body.seeker_exp_id
-            seeker_exp.seeker_exp_start = ctx.request.body.seeker_exp_start
-            seeker_exp.seeker_exp_end = ctx.request.body.seeker_exp_end
-            seeker_exp.seeker_exp_com = ctx.request.body.seeker_exp_com
-            seeker_exp.seeker_exp_job = ctx.request.body.seeker_exp_job
-            seeker_exp.seeker_exp_salary = ctx.request.body.seeker_exp_salary
-            seeker_exp.seeker_exp_desc = ctx.request.body.seeker_exp_desc
-            seeker_exp.seeker_exp_comType = ctx.request.body.seeker_exp_comType
-            seeker_exp.seeker_exp_comSize = ctx.request.body.seeker_exp_comSize
+            seeker_exp.seeker_exp_id = ctx.request.body.seeker_exp_id;
+            seeker_exp.seeker_exp_start = ctx.request.body.seeker_exp_start;
+            seeker_exp.seeker_exp_end = ctx.request.body.seeker_exp_end;
+            seeker_exp.seeker_exp_com = ctx.request.body.seeker_exp_com;
+            seeker_exp.seeker_exp_job = ctx.request.body.seeker_exp_job;
+            seeker_exp.seeker_exp_salary = ctx.request.body.seeker_exp_salary;
+            seeker_exp.seeker_exp_desc = ctx.request.body.seeker_exp_desc;
+            seeker_exp.seeker_exp_comType = ctx.request.body.seeker_exp_comType;
+            seeker_exp.seeker_exp_comSize = ctx.request.body.seeker_exp_comSize;
 
             await seekerdao.updateSeeker_exp(seeker_exp);
 
@@ -140,7 +140,7 @@ module.exports = {
         let way = ctx.params.way;
         let id = ctx.params.id;
         if (way == 'edu') await seekerdao.deleteSeeker_edu(id);
-
+         
         if (way == 'exp') await seekerdao.deleteSeeker_exp(id);
 
         ctx.response.redirect('/seeker/index');
@@ -156,43 +156,55 @@ module.exports = {
             seek_job.seeker_phone=ctx.state.seeker.seeker_user_phone;//ctx.request.body.seeker_phone;
             seek_job.seek_time=new Date();
             seek_job.seek_job_verify=2;
+
            let seek_job_id= await seek_jobDAO.insertSeek_job(seek_job);//此处逻辑如何搭建，插入数据库之后
            let seek_job_info=await seek_jobDAO.getOneSeek_job(seek_job_id);
               ctx.render('s_seek_info.html', {
                   nowUser:'seeker',
               seek_job_info:seek_job_info,
           });
+
         }
         else if(act=='update'){//是否确认更新的招聘消息
             let seek_job_verify=0;
             await seek_jobDAO.updateOneSeek_job(id,seek_job_verify);
+
             let seek_job_info=await seek_jobDAO.getOneSeek_job(id);
                 ctx.render('s_seek_info.html', {
                     nowUser:'seeker',
               seek_job_info:seek_job_info,
           });
+
         }
         else if(act=='delete'){
             let seek_job_verify=-1;
             await seek_jobDAO.updateOneSeek_job(id,seek_job_verify);
+
                 let seek_job_info=await seek_jobDAO.getOneSeek_job(id);
                 ctx.render('s_seek_info.html', {
                     nowUser:'seeker',
               seek_job_info:seek_job_info,
           });
-        }
-   },
 
+        }
+          ctx.response.redirect('/seeker/seek_job');
+   },
+   //获取一条职位信息，可能申请过
+      r_seek_job_info:async(ctx)=>{
+         let seek_job_id=ctx.params.id;
+         let seek_job_info= await seek_jobDAO.getOneSeek_job(seek_job_id);
+         ctx.render('s_seek_info.html',{
+            seek_job_info:seek_job_info,
+         });
+      },
     //查看所有已经申请的职位
     r_seeker_all_job: async (ctx) => {
 
         let seeker = ctx.state.seeker;
-       // seeker.seeker_user_phone;
-
-        //     let jobs = await 
          let jobs= await seek_jobDAO.getSome_seek_job(seeker.seeker_user_phone);
 
         ctx.render('s_jobs.html', {
+
             nowUser:'seeker',
             seeker: seeker,
             jobs:jobs,
@@ -206,20 +218,6 @@ module.exports = {
 
     //检索职位信息,通过地区，职位期望，薪水，公司电话,com_job
     getSomeJobs: async (ctx) => {
-
-    },
-
-
-    //获取具体的职位申请的状态,seeker_job
-    getSeekerJob_state: async (seeker_job_id) => {
-
-    },
-    //更新职位申请的状态
-    r_updateSeeker_job: async (ctx, seeker_phone) => {
-
-    },
-    //添加职位申请,com_job_id,seeker_phone->seeker_job
-    r_insertSeeker_job: async (ctx) => {
 
     },
 
