@@ -228,11 +228,7 @@ r_seekerInfo: async (ctx) => {
 
 
 
-    //检索职位信息,通过地区，职位期望，薪水，公司电话,com_job
-    getSomeJobs: async (ctx) => {
-
-    },
-
+   
 
 
 }

@@ -78,7 +78,7 @@ module.exports = {
         * 
         * 
         */
-    r_select_allInfo :async() => {
+    r_select_allInfo :async(ctx) => {
         let way=ctx.params.way;
         if (way=='coms'){
              let coms = admindao.getAllcoms;
@@ -98,13 +98,26 @@ module.exports = {
 
 
     },
+    //增加类别信息
     r_addTermInfo:async(ctx)=>{
         let way=ctx.params.way;
         if(way=='job'){
-            await admindao.insertTerm_job;
+            let term_job={};
+            term_job.term_job=ctx.request.body.term_job;
+            term_job.parent_job=ctx.request.body.parent_id;
+            await admindao.insertTerm_job(term_job);
         }
+        else if(way=='edu'){
+            let term_edu=ctx.request.body.term_edu;
+            await admindao.insertTerm_edu(term_edu);
+        }
+        else if(way=='salary'){
+            let term_salary=ctx.request.body.term_salary;
+            await admindao.insertTerm_salary(term_salary);
+        }
+        ctx.response.redirect('');
     },
-
+    
     /**
         * 查询单个企业信息
         * @method select_Onecom

@@ -19,9 +19,18 @@ module.exports = {
      * @param  com_user_phone
      * 
      */
-    getAll_seek_job: async (com_user_phone,com_job_id) => {
-       
-     
+    getSomeSeeks: async (com_user_phone,seek_job_verify) => {
+        let sql = "SELECT *,date_format(seek_time,'%Y-%m-%d %H:%i') as seek_f_time FROM seekers, com_job,seek_job WHERE com_job.com_job_id = seek_job.com_job_id "
+        +" and seek_job.seeker_phone = seeker_user_phone"
+        +" and com_user_phone = '"+com_user_phone+"'" 
+        +" and seek_job_verify = "+seek_job_verify;
+
+         let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
+      if (result.length > 0) {
+            return result;
+        } else {
+            return false;
+        }
     },
 
    
@@ -108,11 +117,7 @@ module.exports = {
             +" WHERE seek_job_id ='"+seek_job_id+"'";
        let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.UPDATE });
        
-        if (result.length > 0) {
-            return result[0];
-        } else {
-            return false;
-        }
+       
     },
     
 
