@@ -15,26 +15,39 @@ let getUser = (ctx) => {
     return 'null'
 }
 
-let com_job_type_add = (com_job,type, value) => {
-
-    if (type == 'com_job') com_job.com_job = value;
-    if (type == 'com_job_city')com_job.com_job_city = value;
-    if (type == 'com_job_salary')com_job.com_job_salary = value;
+let com_job_type_add = (ctx, type, value) => {
+    let com_job = UTILS.parse(ctx.cookies.get('search_com_job'));
+if(value=='不限')   return com_job;
+    if (type == 'com_job_city') com_job.com_job_city = value;
+    if (type == 'com_job_salary') com_job.com_job_salary = value;
     if (type == 'com_job_edu') com_job.com_job_edu = value;
     if (type == 'com_job_exp') com_job.com_job_exp = value;
     if (type == 'com_job_type') com_job.com_job_type = value;
+
+    if (type == 'com_job') {
+        com_job = { com_job: '', com_job_city: '', com_job_salary: '', com_job_edu: '', com_job_exp: '', com_job_type: '' };
+        com_job.com_job = value;
+    } else {
+        com_job.com_job = '';
+    }
+
+    //设置cookie
+    let cookie_value = Buffer.from(JSON.stringify(com_job)).toString('base64');
+    ctx.cookies.set('search_com_job', cookie_value, { signed: true });
+
     return com_job;
 
 }
-let getCom_job_sql = () => {
-    let sql = "SELECT * FROM com_job,coms "
+let getCom_job_sql = (com_job) => {
+
+    let sql = "SELECT *,date_format(com_job_publish_time,'%Y-%m-%d' '%H:%i') as com_job_f_time FROM com_job,coms "
         + " where com_job.com_user_phone = coms.com_user_phone";
-    if (global.search_com_job.com_job != '') sql + " AND com_job="+global.search_com_job.com_job;
-    if (global.search_com_job.com_job_city != '') sql + " AND com_job_city="+global.search_com_job.com_job_city;
-    if (global.search_com_job.com_job_salary != '') sql + " AND com_job_salary="+global.search_com_job.com_job_salary;
-    if (global.search_com_job.com_job_edu != '') sql + " AND com_job_edu="+global.search_com_job.com_job_edu;
-    if (global.search_com_job.com_job_exp != '') sql + " AND com_job_exp = "+global.search_com_job.com_job_exp;
-    if (global.search_com_job.com_job_type != '') sql + " AND com_job_type="+global.search_com_job.com_job_type;
+    if (com_job.com_job != '') sql = sql + " AND com_job='" + com_job.com_job + "'";
+    if (com_job.com_job_city != '') sql = sql + " AND com_job_city='" + com_job.com_job_city + "'";
+    if (com_job.com_job_salary != '') sql = sql + " AND com_job_salary='" + com_job.com_job_salary + "'";
+    if (com_job.com_job_edu != '') sql = sql + " AND com_job_edu='" + com_job.com_job_edu + "'";
+    if (com_job.com_job_exp != '') sql = sql + " AND com_job_exp = '" + com_job.com_job_exp + "'";
+    if (com_job.com_job_type != '') sql = sql + " AND com_job_type='" + com_job.com_job_type + "'";
 
     return sql;
 }
@@ -113,7 +126,6 @@ module.exports = {
     },
 
 
-
     //查看一条职位信息
     r_JobInfo: async (ctx) => {
         let job_id = ctx.params.id;
@@ -162,18 +174,29 @@ module.exports = {
 
     r_search_job: async (ctx) => {
 
-         if (!ctx.cookies.get('search_com_job')){
-          let com_job = { com_job: '', com_job_city: '', com_job_salary: '', com_job_edu: '', com_job_exp: '', com_job_type: '' };
-            let search_com_job = Buffer.from(JSON.stringify(com_job)).toString('base64');
-            ctx.cookies.set('search_com_job', search_com_job, { signed: true });
-}else{
-    let search_com_job  = UTILS.parse(ctx.cookies.get('seeker_cookie'));
+        let com_job = { com_job: '', com_job_city: '', com_job_salary: '', com_job_edu: '', com_job_exp: '', com_job_type: '' };
+        let search_com_job = Buffer.from(JSON.stringify(com_job)).toString('base64');
+        ctx.cookies.set('search_com_job', search_com_job, { signed: true });
 
-}
+        if (ctx.request.body.s_com_job != undefined) com_job.com_job = ctx.request.body.s_com_job;
+        let results = await comdao.getSomeJobs(getCom_job_sql(com_job));
+
+        let term_edu = await admindao.getTerm_edu();
+        let term_exp = await admindao.getTerm_exp();
+        let term_job = await admindao.getTerm_job();
+        let term_salary = await admindao.getTerm_salary();
+
         ctx.render('joblist.html', {
+            com_job :com_job,
+            term_edu: term_edu,
+            term_exp: term_exp,
+            term_job: term_job,
+            term_salary: term_salary,
+            title: '职位搜索',
             nowUser: getUser(ctx),
             seekerUser: ctx.state.seeker,
-            comUser: ctx.state.com
+            comUser: ctx.state.com,
+            results: results
 
         });
 
@@ -182,15 +205,25 @@ module.exports = {
 
         let type = ctx.params.type;
         let value = ctx.params.value;
-        let sql = com_job_type_add(type, value);
+        let com_job = com_job_type_add(ctx, type, value);
 
-          let com_job  = UTILS.parse(ctx.cookies.get('seeker_cookie'));
+        let sql = getCom_job_sql(com_job);
 
         let results = await comdao.getSomeJobs(sql);
 
+        let term_edu = await admindao.getTerm_edu();
+        let term_exp = await admindao.getTerm_exp();
+        let term_job = await admindao.getTerm_job();
+        let term_salary = await admindao.getTerm_salary();
+
         ctx.render('joblist.html', {
-            search_com_job:  global.search_com_job ,
-            results,results,
+            term_edu: term_edu,
+            term_exp: term_exp,
+            term_job: term_job,
+            term_salary: term_salary,
+            title: '职位搜索',
+            search_com_job: com_job,
+            results, results,
             nowUser: getUser(ctx),
             seekerUser: ctx.state.seeker,
             comUser: ctx.state.com

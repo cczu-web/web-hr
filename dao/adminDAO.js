@@ -122,6 +122,55 @@ updateOneseeker_ertificate:async (seeker_certificate)=>{
 },
 
 
+getTerm_edu:async ()=>{
+       let sql="SELECT * FROM term_edu ";
+        let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
+
+        if (result.length > 0) {
+            return result;
+        } else {
+            return false;
+        }
+   
+
+},
+
+getTerm_exp:async ()=>{
+           let sql="SELECT * FROM term_exp ";
+        let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
+
+        if (result.length > 0) {
+            return result;
+        } else {
+            return false;
+        }
+
+},
+
+getTerm_job:async ()=>{
+        let sql="SELECT * FROM term_job ";
+        let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
+
+        if (result.length > 0) {
+            return result;
+        } else {
+            return false;
+        }
+
+},
+
+getTerm_salary:async ()=>{
+        let sql="SELECT * FROM term_salary ";
+        let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
+
+        if (result.length > 0) {
+            return result;
+        } else {
+            return false;
+        }
+
+},
+
 
 
 //增加职位类别表

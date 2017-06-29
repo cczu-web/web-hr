@@ -10,8 +10,8 @@ module.exports = {
     database: 'web_hr',    //数据库地址
     database_username:'root',
     database_password:'123456',
-    database_host: 'ali.vickey.me', // 主机名
-   // database_host: 'localhost', // 主机名
+  //  database_host: 'ali.vickey.me', // 主机名
+    database_host: 'localhost', // 主机名
     database_port: 3306, // 端口号，MySQL默认3306
 
     redis_url:'',       //redis地址
