@@ -1,5 +1,6 @@
 let db = require('../db');
 let UTILS = require('../utils');
+
 module.exports = {
 
 
@@ -136,7 +137,9 @@ module.exports = {
 
         if (result.length > 0) {
             let com_job = result[0];
+
             com_job.com_job_publish_time=UTILS.formatDateTime(result[0].com_job_publish_time)
+
             return  com_job;
         } else {
             return false;

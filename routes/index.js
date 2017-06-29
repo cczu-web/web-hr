@@ -55,8 +55,17 @@ await indexservice.r_index(ctx);
 .get('seeker_info/:id',async(ctx,next)=>{
   await indexservice.r_one_seekInfo(ctx);
 })
+
+//查看个人简历，此处id代表的是什么
+.get('search/job',async(ctx,next)=>{
+  await indexservice.r_search_job(ctx);
+})
+.get('search/job/add/:type/:value',async(ctx,next)=>{
+  await indexservice.r_search_job_add(ctx);
+})
+
 //搜索职位信息
-.post('searchJob',async(ctx,next)=>{
+.post('search/job',async(ctx,next)=>{
     await indexservice.r_search_job(ctx);
 })
 
