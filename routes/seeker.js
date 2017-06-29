@@ -56,6 +56,9 @@ router
   .get('index', async (ctx, next) => {
     await seekerservice.r_seekerIndex(ctx);
   })
+  .get('my/info', async (ctx, next) => {
+    await seekerservice.r_seekerInfo(ctx);
+  })
 
   //期望工作更新，工作经历更新，教育经历更新
   .post('update/:way', async (ctx, next) => {

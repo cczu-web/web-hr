@@ -49,6 +49,7 @@ let getSeekerbyCTX = (ctx) => {
     seeker.seeker_salary = ctx.request.body.seeker_salary;
     seeker.seeker_self = ctx.request.body.seeker_self;
     seeker.seeker_now = ctx.request.body.seeker_now;
+    seeker.seeker_edu = ctx.request.body.seeker_edu;
     return seeker;
 }
 
@@ -91,7 +92,7 @@ com_job.com_job_edu = ctx.request.body.com_job_edu
 com_job.com_job_exp = ctx.request.body.com_job_exp
 com_job.com_job_type= ctx.request.body.com_job_type
 com_job.com_job_desc= ctx.request.body.com_job_desc
-com_job.com_job_publish_time= new Date();
+com_job.com_job_publish_time= formatDateTime(new Date());
 com_job.com_job_status = ctx.request.body.com_job_status
 com_job.com_job_addr= ctx.request.body.com_job_addr
     return com_job;

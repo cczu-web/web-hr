@@ -1,0 +1,105 @@
+{% extends "base.html" %} {% block main %}
+    <div id="container">
+                <div class="clearfix">
+            <div class="content_l">
+            	                <dl class="job_detail">
+                    <dt>
+                        <h1 title="{{com_job.com_job}}">
+                            <em></em>
+                                                        	<div>{{com.com_name}}</div>
+                           	                           	{{com_job.com_job}}
+                        </h1>
+                        
+                                               	
+                       	                       	<a class="inline jd_collection" href="#loginPop" title="登录">
+                       		                       	</a>
+                       	                    </dt>
+                    <dd class="job_request">
+                    	<span class="red">{{com_job.com_job_salary}}k</span>
+                       	<span>	{{com_job.com_job_city}}</span> 
+                       	<span>{{com_job.com_job_exp}} </span>
+                       	<span> {{com_job.com_job_edu}}</span> 
+                       	<span>{{com_job.com_job_type}}</span><br />
+                      	  职位诱惑 : 大家都来了 你还在等什么！！
+                      	<div>发布时间：{{com_job.com_job_publish_time}}</div>
+                    </dd>
+                    <dd class="job_bt">
+                        <h3 class="description">职位描述</h3>
+						{{com_job.com_job_desc}}
+                         </dd>
+                     
+                                        	<dd class="unresume">
+	                        <div>
+	                        	你还没有简历呢，你可以<a href="login.html" target="_blank" title="完善在线简历">完善在线简历</a>，也可<a class="inline" href="#loginPop" title="登录">上传附件简历</a>直接投递
+	                       	</div>
+	                    </dd>
+                  
+                                        <dd>
+										{%if seeker!= null%}
+                                        	                    			                        	<a href="#loginPop" title="登录" class="inline btn fr btn_apply">投个简历</a>
+																										{%endif%}
+	                        	                   		                	          
+																						       </dd>
+                </dl>
+                              
+            </div>	
+            <div class="content_r">
+                <dl class="job_company">
+                    <dt>
+                    	<a href="h/c/683.html" target="_blank">
+                            <img class="b2" src="/style/images/ff80808140ac5ed90140b953972e0215.png" width="80" height="80" alt="{{com.com_name}}" />
+                            <div>
+                                <h2 class="fl">
+                                	                                  		{{com.com_name}}
+                                  	                                  	
+                                  	                                    	<img src="/style/images/valid.png" width="15" height="19" alt="认证企业" /> 
+                                    	<span class="dn">认证企业</span>
+                                                                        
+                                </h2>
+                            </div>
+                        </a>
+                    </dt>
+                    <dd>
+                    	<ul class="c_feature reset">
+                        	<li><span>领域</span> {{com.com_label}}</li>
+                        	<li><span>规模</span> {{com.com_scale}}</li>
+							<li><span>邮箱</span> {{com.com_email}}</li>
+                        	<li>
+                        		<span>主页</span> 
+                        		           							<a href="{{com.com_website}}" target="_blank" title="{{com.com_website}}" rel="nofollow">{{com.com_website}}</a>
+           						                        	</li>
+                        </ul>
+                        
+                        <h4>HR</h4>
+                        <ul class="c_feature reset">
+                        	<li><span>负责人</span> {{com.com_hr}}</li>
+       <li><span>联系方式</span> {{com.com_user_phone}}</li>
+                        	                        </ul>
+                        
+                   
+                       	
+                       	                       	<h4>工作地址</h4>
+                       	<div>{{com_job.com_job_addr}}</div>
+                       	<div id="smallmap"></div>
+                     
+                       	                    </dd>
+                </dl>
+                            
+                  <img src="/style/images/zhouyou.jpg" width="280" height="135" />
+                </a>
+            </div>
+       	</div>                    
+      <input type="hidden" value="" name="userid"/>
+      
+	
+	  
+	</div>
+    
+ 
+</div>
+
+			<div class="clear"></div>
+	    
+	    </div>
+	</div>
+{% endblock %}

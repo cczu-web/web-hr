@@ -108,12 +108,12 @@ module.exports = {
     updateCom_job: async (com_job) => {
         let sql = "UPDATE com_job "
             +"SET com_job='"+com_job.com_job+"' ,com_job_province = '"+com_job.com_job_province+"',"
-            +"com_job_name'"+com_job.com_job_name+"',"
+            +"com_job_name='"+com_job.com_job_name+"',"
             +"com_job_city='"+com_job.com_job_city+"', com_job_salary='"+ com_job.com_job_salary+"',"
             +"com_job_num='"+com_job.com_job_num+"',com_job_status='"+com_job.com_job_status+"',"
             +"com_job_edu='"+com_job.com_job_edu+"',com_job_exp='"+com_job.com_job_exp+"',"
-            +"com_job_type='"+com_job.com_job_type+"',com_job_desc='"+com.com_job.com_job_desc+"',"
-            +"com_job_publish_time='"+com_job.com_job_publish_time+"',com_job_addr="+com_job.com_job_addr+"'"
+            +"com_job_type='"+com_job.com_job_type+"',com_job_desc='"+com_job.com_job_desc+"',"
+            +"com_job_publish_time='"+com_job.com_job_publish_time+"',com_job_addr='"+com_job.com_job_addr+"'"
             +" WHERE com_job_id =  '"+com_job.com_job_id+"'";
             
             await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.UPDATE });   
@@ -133,8 +133,11 @@ module.exports = {
             +" WHERE com_job_id='"+com_job_id+"'";
         let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
 
+
         if (result.length > 0) {
-            return result[0];
+            let com_job = result[0];
+            com_job.com_job_publish_time=formatDateTime(com_job_publish_time)
+            return  com_job;
         } else {
             return false;
         }  
@@ -169,7 +172,14 @@ module.exports = {
      * @param  sql
      */
     getSomeJobs: async (sql) => {
-       
+        
+        let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
+
+        if (result.length > 0) {
+            return result;
+        } else {
+            return false;
+        }   
      
     },
 

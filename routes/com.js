@@ -69,6 +69,7 @@ router
   .get('publish/job', async (ctx, next) => {
 
     ctx.render('c_job.html', {
+      nowUser:'com',
       com: ctx.state.com
     });
   })
@@ -90,6 +91,15 @@ router
     await comservice.r_com_update(ctx);
   })
 
+  /**
+   * 获得公司发布的招聘信息
+   * //1有效
+   * //0结束
+   */
+  .get('my/job/:state', async (ctx, next) => {
+    await comservice.r_com_some_jobs(ctx);
+  })
+
 
 
 //公司选定求职者
@@ -99,6 +109,11 @@ router
   })
 
 
-
+  //账号退出
+  .get('loginout', async (ctx, next) => {
+    ctx.cookies.set('com_cookie', '');
+    console.log('user logout !');
+    ctx.response.redirect('/');
+  })
 
 module.exports = router;

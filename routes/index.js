@@ -8,14 +8,18 @@ var router = require('koa-router')();
 const UTILS = require('../utils');
 let indexservice = require('../service/indexService.js');
 router
+  .get('*', async (ctx, next) => {
+    
+      ctx.state.seeker = UTILS.parse(ctx.cookies.get('seeker_cookie'));
+      ctx.state.com = UTILS.parse(ctx.cookies.get('com_cookie'));
+    
+    await next();
+
+  })
   .get('/', async (ctx, next) => {
 
+await indexservice.r_index(ctx);
 
-    ctx.render('index.html', {
-   
-  
-
-    });
   })
 
   //注册
@@ -35,13 +39,7 @@ router
 
   })
 
-  .get('*', async (ctx, next) => {
-    
-    // await articleservice.init();
 
-    await next();
-
-  })
 
   //获取查看一条职位信息
 .get('job_info/:id',async(ctx,next)=>{
