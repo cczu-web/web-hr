@@ -7,74 +7,20 @@
     <meta name="description" content="A layout example that shows off a blog page with a list of posts.">
     <title>{{title}}</title>
 
-    <link rel="stylesheet" href="/css/pure-min.css" integrity="sha384-" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/grids-responsive-min.css">
-    <link rel="stylesheet" href="/css/blog.css">
-	
-    <!-- 富文本编辑器 -->
-    <link rel="stylesheet" type="text/css" href="/css/wangEditor.min.css">
-    	<!-- jQuery -->
-	<script src="/js/jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="/js/wangEditor.min.js"></script>
-
-
 	</head>
 	<body>
-		
-	  <div id="layout" class="pure-g">
-        <div class="sidebar pure-u-1 pure-u-md-1-4">
-            <div class="header">
-                <img width="100" height="100" class="header-logo" src="/img/common/logo.jpg">
 
-              <h1 class="brand-title">  <a href="/" style=" color:aliceblue;">{{title}}</a></h1> 
-                <h2 class="brand-tagline">A blog,by nodejs and prue</h2>
+    <div>这是头部</div>	
 
-                <hr style="height:1px;border:none;border-top:1px dashed #666 ">
-                <div>
-                    {% for term in terms %}   
 
-                     <a class="post-category " style=" background: {{term.term_color}}" href="/t/{{term.term_name}}/1">{{term.term_name}}</a>
-                  
-                    {% endfor %}
-
-                 
-                   
-
-                </div>
-            </div>
-        </div>
-	<!-- END left -->
 
 	  {% block main %} {% endblock %}
 
   
 
-	
-	  </div>
-
-    <div class="footer">
-        <div class="pure-menu pure-menu-horizontal">
-            <ul>
-              
-                {% for link in links %}
-                 <li class="pure-menu-item"> 
-                 <a href="{{link.link_url}}" class="pure-menu-link">
-                     <img width="25" height="25" class="footer-logo" src="{{link.link_image}}">
-                     {{link.link_name}}</a></li>
-
-                {% endfor %}
-              
-            </ul>
-        </div>
-
-        <div class="pure-menu pure-menu-horizontal">
-		 <ul>
-		   <li class="pure-menu-item"><a> © 2014-2017 </a></li>
-		    <li class="pure-menu-item"><a href="http://vickey.me">VICKEY.ME</a></li>
-			 <li class="pure-menu-item"><a>苏ICP备15028327号</a></li>
-             
-			  </ul>
-        </div>
+    <div>
+        这是底部
+  
     </div>
        
 	</body>

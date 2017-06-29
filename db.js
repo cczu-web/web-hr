@@ -60,7 +60,7 @@ let seekers = sequelize.define('seekers', {
     seeker_hukou: Sequelize.STRING(40),
     seeker_living: Sequelize.STRING(40),
     seeker_email: Sequelize.STRING(40),
-    seeker_type: Sequelize.TEXT('tiny'),
+    seeker_type: Sequelize.STRING(20),
     seeker_workcity: Sequelize.STRING(40),
     seeker_job: Sequelize.STRING(60),
     seeker_salary: Sequelize.STRING(30),
@@ -135,6 +135,7 @@ let coms = sequelize.define('coms', {
     com_verify:Sequelize.TEXT('tiny'),
     com_scale:Sequelize.STRING(30),
     com_website: Sequelize.STRING(40),
+     com_label: Sequelize.STRING(40),
 
 
 }, {
