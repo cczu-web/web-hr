@@ -107,12 +107,22 @@ module.exports = {
          
         });
     },
-    //查看一家公司的信息
-    r_com_info: async (ctx) => {
-        let com_id = ctx.params.id;
-        let comInfo = await comdao.getCom(com_id);
-        ctx.render('com_info.html', {
-            comInfo: comInfo,
+
+      //查看一条职位信息
+     r_JobInfo:async(ctx)=>{
+         let job_id=ctx.params.id;
+         let jobInfo =await comdao.getCom_job(job_id);
+        ctx.render('job_info.html',{
+        jobInfo:jobInfo,
+     });
+    } ,
+     //查看一家公司的信息
+    r_com_info:async(ctx)=>{
+        let com_id=ctx.params.id;
+        let comInfo =await comdao.getCom(com_id);
+        ctx.render('com_info.html',{
+           comInfo:comInfo,
+
         })
     },
     //查看个人简历,是否具有修改求职者的权限 
@@ -124,6 +134,7 @@ module.exports = {
         });
     },
     //求职者搜索职位信息
+
     r_search_job: async (ctx) => {
         let searchStr = ctx.request.body.searchStr;
 

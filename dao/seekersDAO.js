@@ -319,10 +319,11 @@ module.exports = {
         let sql = "SELECT * FROM ";
 
     },
-    //搜索职位信息
-     search_jobs:async(string)=>{
+   //检索职位信息,通过地区，职位期望，薪水，公司电话,com_job
+    getSomeJobs: async (ctx) => {
 
-     }
+    },
+
 
 
 

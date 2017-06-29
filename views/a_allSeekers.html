@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block main %}
+
+<div>
+<br>
+    <table>
+        <tr><td>求职者电话</td><td>姓名</td><td>性别</td><td>户口所在地</td><td>现居地</td><td>邮箱</td><td>期望工作城市</td><td>期望工作</td><td>期望月薪</td><td>自我介绍</td></tr>
+         {% for seeker in seekers %}
+        <tr><td>{{seeker.seeker_user_phone)}}</td><td>{{seeker.seeker_name}}</td><td>{{seeker.seeker_sex}}</td><td>{{seeker.seeker_hukou}}</td><td>{{seeker.seeker_living}}</td><td>{{seeker.seeker_email}}</td><td>{{seeker.seeker_workcity}}</td><td>{{seeker.seeker_job}}</td><td>{{seeker.seeker_salary}}</td><td>{{seeker.seeker_self}}</td></tr>
+         {% endfor %}
+    </table>
+
+
+<br>
+</div>
+
+{% endblock %}
