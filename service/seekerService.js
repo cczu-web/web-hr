@@ -47,7 +47,7 @@ module.exports = {
 
     },
 
-   //求职者首页
+
 
     r_seekerIndex: async (ctx) => {
 
@@ -174,8 +174,6 @@ r_seekerInfo: async (ctx) => {
                   nowUser:'seeker',
               seek_job_info:seek_job_info,
           });
-
-         
 
 
         }
