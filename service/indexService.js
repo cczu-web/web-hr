@@ -95,27 +95,30 @@ module.exports = {
     //查看一条职位信息
     r_JobInfo: async (ctx) => {
         let job_id = ctx.params.id;
-    
-      
+       
+        let seek_verify=await seek_jobDAO.getOneSeek(job_id,ctx.state.seeker.seeker_user_phone);
         let jobInfo = await comdao.getCom_job(job_id);
+         console.log('加油'+ctx.state.seeker.seeker_user_phone);
+
         ctx.render('job_info.html', {
             com_job: jobInfo,
             nowUser:getUser(ctx),
              seeker: ctx.state.seeker,
-               com: ctx.state.com
+               com: ctx.state.com,
+               seek_verify:'已申请'
 
          
         });
     },
 
-      //查看一条职位信息
+     /* //查看一条职位信息
      r_JobInfo:async(ctx)=>{
          let job_id=ctx.params.id;
          let jobInfo =await comdao.getCom_job(job_id);
         ctx.render('job_info.html',{
         jobInfo:jobInfo,
      });
-    } ,
+    } ,*/
      //查看一家公司的信息
     r_com_info:async(ctx)=>{
         let com_id=ctx.params.id;

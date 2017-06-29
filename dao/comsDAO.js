@@ -1,5 +1,5 @@
 let db = require('../db');
-
+let UTILS = require('../utils');
 module.exports = {
 
 
@@ -129,14 +129,14 @@ module.exports = {
     getCom_job: async (com_job_id) => {
 
          let sql="SELECT * "+
-            "FROM  com_job" 
-            +" WHERE com_job_id='"+com_job_id+"'";
+            "FROM  com_job cj ,coms c" 
+            +" WHERE cj.com_user_phone=c.com_user_phone and cj.com_job_id='"+com_job_id+"'";
         let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
 
 
         if (result.length > 0) {
             let com_job = result[0];
-            com_job.com_job_publish_time=formatDateTime(com_job_publish_time)
+            com_job.com_job_publish_time=UTILS.formatDateTime(result[0].com_job_publish_time)
             return  com_job;
         } else {
             return false;

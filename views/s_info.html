@@ -18,8 +18,8 @@
 							<div>
 								<input type="hidden" id="seeker_sex" name="seeker_sex" value="">
 								<ul class="s_radio clearfix s_radio_ex">
-									<li>男</li>
-									<li>女</li>
+									{% if seeker.seeker_sex == '男'%}<li class="current">男</li>{%else%}<li>男</li>{%endif%}
+									{% if seeker.seeker_sex == '女'%}<li class="current">女</li>{%else%}<li>女</li>{%endif%}
 								</ul>
 							</div>
 
@@ -49,7 +49,7 @@
 							<h3>本人学历</h3>
 							<div>
 								<input type="hidden" value="{{seeker.seeker_edu}}" name="seeker_edu" id="seeker_edu_education">
-								<input type="button" value="请选择你的学历" id="seeker_edu_button" class="select">
+								<input type="button" id="seeker_edu_button" value="{{seeker.seeker_edu}}"  class="select">
 								<div class="dn" id="box_scale" style="display: none;">
 									<ul class="reset">
 										 {% if seeker.seeker_edu == '大专'%}  <li class="current"> 大专</li>{%else%}<li>大专</li>{%endif%}
@@ -65,11 +65,12 @@
 							<h3>工作年龄</h3>
 							<div>
 								<input type="hidden" value="{{seeker.seeker_exp}}" name="seeker_exp" id="seeker_now">
-								<input type="button" value="请选择工作年龄" name="seeker_now_button" id="seeker_now_button" class="select">
+								<input type="button" name="seeker_now_button" value="{{seeker.seeker_exp}}" id="seeker_now_button" class="select">
 								<div class="dn" id="box_industry" style="display: none;">
 									<ul class="reset">
 									 {% if seeker.seeker_exp == '不限'%}
-                                                <li class="current">{%else%}
+                                                <li class="current">
+													{%else%}
                                                     <li>{%endif%} 不限
                                                     </li>
 

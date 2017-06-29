@@ -30,10 +30,10 @@ module.exports = {
      * 更新招聘者招聘状态
      * 让他们再确认一遍招聘条件
      */
-    getSome_seek_job: async (com_user_phone,com_job_id) => {
-       let sql="select * from seek_job sj,com_job cj "
+    getSome_seek_job: async (seeker_phone) => {
+       let sql="select * ,date_format(seek_time,'%Y-%m-%d %H:%i') as seek_f_time from seek_job sj,com_job cj "
        +" where sj.com_job_id=cj.com_job_id and sj.seek_job_verify in (0,1,2,3)"
-       +"sj.seeker_phone='"+seeker_phone+"'";
+       +" and sj.seeker_phone='"+seeker_phone+"'";
       let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
       if (result.length > 0) {
             return result;
@@ -50,17 +50,19 @@ module.exports = {
      * 
      */
     insertSeek_job: async (seek_job) => {
+       
         await db.seek_job.create({
            com_job_id:seek_job.com_job_id,
            seeker_phone:seek_job.seeker_phone,
            seek_time:seek_job.seek_time,
            seek_job_verify:seek_job.seek_job_verify,
        })
-        let sql ="  SELECT last_insert_id() as seek_job_id ";
-        let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
+        console.log('记忆');
+       // let sql ="  SELECT last_insert_id() as seek_job_id ";
+      //  let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
 
-        if (result.length > 0) return result[0].seek_job_id;
-        else return false;
+      //  if (result.length > 0) return result[0].seek_job_id;
+        //else return false;
     
 },
   //更新所有求职者的状态
@@ -75,6 +77,19 @@ module.exports = {
      update_seeker_status: async (com_user_phone,com_job_id,seeker_phone) => {
        
      
+    },
+    //获取一个申请，主要用于判断该求职者是否已经申请过该职位
+       getOneSeek:async(job_id,seeker_user_phone)=>{
+       let sql="select * from seek_job  "
+       +" where   com_job_id='"+job_id+"'"
+       +" and seeker_phone='"+seeker_user_phone+"'";
+       let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
+       
+        if (result.length > 0) {
+            return  '已申请';//已申请
+        } else {
+            return '未申请';//未申请
+        }
     },
 
     //获得一条职位信息,是否需要公司的部分信息

@@ -67,7 +67,7 @@ module.exports = {
 r_seekerInfo: async (ctx) => {
      let seeker = ctx.state.seeker;
      seeker = await seekerdao.getSeeker(seeker.seeker_user_phone);
-
+    // console.log(seeker.seeker_edu);
       ctx.render('s_info.html', {
             nowUser:'seeker',
             seeker: seeker,
@@ -163,18 +163,13 @@ r_seekerInfo: async (ctx) => {
         if(act=='insert') 
         {
             let seek_job={};
-            seek_job.com_job_id=id;//ctx.request.body.com_job_id;
-            seek_job.seeker_phone=ctx.state.seeker.seeker_user_phone;//ctx.request.body.seeker_phone;
+            seek_job.com_job_id=id;
+            seek_job.seeker_phone=ctx.state.seeker.seeker_user_phone;
             seek_job.seek_time=new Date();
             seek_job.seek_job_verify=2;
 
-           let seek_job_id= await seek_jobDAO.insertSeek_job(seek_job);//此处逻辑如何搭建，插入数据库之后
-           let seek_job_info=await seek_jobDAO.getOneSeek_job(seek_job_id);
-              ctx.render('s_seek_info.html', {
-                  nowUser:'seeker',
-              seek_job_info:seek_job_info,
-          });
-
+           await seek_jobDAO.insertSeek_job(seek_job);//
+            
 
         }
         else if(act=='update'){//是否确认更新的招聘消息
@@ -199,7 +194,7 @@ r_seekerInfo: async (ctx) => {
           });
 
         }
-          ctx.response.redirect('/seeker/seek_job');
+          ctx.response.redirect('/seeker/myjob');
    },
    //获取一条职位信息，可能申请过
       r_seek_job_info:async(ctx)=>{
@@ -215,7 +210,7 @@ r_seekerInfo: async (ctx) => {
         let seeker = ctx.state.seeker;
          let jobs= await seek_jobDAO.getSome_seek_job(seeker.seeker_user_phone);
 
-        ctx.render('s_jobs.html', {
+        ctx.render('delivery.html', {
 
             nowUser:'seeker',
             seeker: seeker,

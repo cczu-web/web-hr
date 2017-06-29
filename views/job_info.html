@@ -35,11 +35,14 @@
 	                    </dd>
                   
                                         <dd>
-										{%if seeker!= null%}
-                                        	                    			                        	<a href="#loginPop" title="登录" class="inline btn fr btn_apply">投个简历</a>
-																										{%endif%}
-	                        	                   		                	          
-																						       </dd>
+									                         	 	
+										  {% if nowUser =='seeker' %}	 
+									   		 {%if seek_verify=='未申请' %}
+                                        <a href="/seeker/job/insert/{{com_job.com_job_id}}"  title=""  class=" btn fr btn_apply">投个简历</a>
+												 {%else%}<a title="" class=" btn fr btn_apply">已申请</a>
+												   {%endif%}
+													{%endif%}
+										</dd>
                 </dl>
                               
             </div>	
