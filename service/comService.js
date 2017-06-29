@@ -49,6 +49,7 @@ module.exports = {
             nowUser: 'com',
             title: com.com_name,
             com: com,
+            comUser: ctx.state.com
 
         });
     },
@@ -61,7 +62,8 @@ module.exports = {
             ctx.render('c_info.html', {
                 nowUser: 'com',
                 title: '我的信息',
-                com: ctx.state.com
+                com: ctx.state.com,
+                comUser: ctx.state.com
             });
 
         }
@@ -71,7 +73,9 @@ module.exports = {
             ctx.render('c_all_job.html', {
                 nowUser: 'com',
                 title: '所有职位',
-                jobs: jobs
+                jobs: jobs,
+                comUser: ctx.state.com
+
             });
 
         }
@@ -87,7 +91,8 @@ module.exports = {
             nowUser: 'com',
             title: com_job.com_job_name,
             com: com,
-            com_job: com_job
+            com_job: com_job,
+            comUser: ctx.state.com
         });
     },
 
@@ -126,7 +131,7 @@ module.exports = {
     r_com_some_jobs: async (ctx) => {
         let state = ctx.params.state;
         let com = ctx.state.com;
-      
+
         let title = '已发布职位'
         let sql = "SELECT * ,date_format(com_job_publish_time,'%Y-%m-%d' '%H:%i')as com_job_f_time" +
             " FROM  com_job"
@@ -136,7 +141,7 @@ module.exports = {
         let com_jobs = await comdao.getSomeJobs(sql);
         if (state == '1') {
 
-        }else {
+        } else {
             title = '已下线职位'
         }
 
@@ -145,29 +150,44 @@ module.exports = {
             title: title,
             com: com,
             com_jobs: com_jobs,
-            state:state, //用来页面判断显示状态
+            state: state, //用来页面判断显示状态
+            comUser: ctx.state.com
 
         });
-
-
     },
-    //获取一个职位的所有申请信息
-    getAllSeeks_job: async (ctx) => {
+    //获取所有申请信息
+    getSomeSeeks: async (ctx) => {
+        let state = ctx.params.state;
+        let title = '简历'
         let com = ctx.state.com;
-        let com_job_id = ctx.params.id;
-        let seekers = seek_jobDAO.getAll_seek_job(com.com_user_phone, com_job_id)
-        ctx.render('c_seekers.html', {
+        let res = await seek_jobDAO.getSomeSeeks(com.com_user_phone, state);
+
+        if (state == -1) title = '不合适简历';
+        if (state == 0) title = '待确认';
+        if (state == 1) title = '已通知面试简历';
+        if (state == 2) title = '待查看简历';
+        if (state == 3) title = '已查看简历';
+
+        ctx.render('c_cvs.html', {
             nowUser: 'com',
-            title: '所有申请者',
+            title: title,
             com: com,
-            seekers: seekers
+            seekers: res,
+            state: state,
+            comUser: ctx.state.com
 
         });
     },
     //选定求职者
     selectSeeker: async (ctx) => {
-        let com = ctx.state.com;
-        ctx.request.body.seeker_user_phone;
+         let way =ctx.params.way;
+        let seek_job_id =ctx.params.id;
+        let seek_job_verify = 2; 
+        if(way == 'select')seek_job_verify =1;
+        if(way == 'cancel') seek_job_verify = -1;
+      
+       await seek_jobDAO.updateOneSeek_job(seek_job_id,seek_job_verify);
+  ctx.response.redirect('/com/job/cv/' + seek_job_verify);
 
     }
 

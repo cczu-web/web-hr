@@ -4,20 +4,21 @@
 		<a class="btn_create" href="create.html">发布新职位</a>
 		<dl class="company_center_aside">
 			<dt>我收到的简历</dt>
+
 			<dd>
-				<a href="unHandleResumes.html">待处理简历</a>
+				<a href="/com/job/cv/2">待查看简历</a>
 			</dd>
+
 			<dd>
-				<a href="canInterviewResumes.html">待定简历</a>
+				<a href="/com/job/cv/3">已查看简历</a>
 			</dd>
+
 			<dd>
-				<a href="haveNoticeResumes.html">已通知面试简历</a>
+				<a href="/com/job/cv/1">已通知面试简历</a>
 			</dd>
+
 			<dd>
-				<a href="haveRefuseResumes.html">不合适简历</a>
-			</dd>
-			<dd class="btm">
-				<a href="autoFilterResumes.html">自动过滤简历</a>
+				<a href="/com/job/cv/-1">不合适简历</a>
 			</dd>
 		</dl>
 		<dl class="company_center_aside">
@@ -25,20 +26,19 @@
 
 			{% if state == 1 %}
 			<dd class="current">
-				<a href="positions.html">有效职位</a>
+				<a href="/com/my/job/1">有效职位</a>
 			</dd>
 			<dd>
-				<a href="positions.html">已下线职位</a>
+				<a href="/com/my/job/0">已下线职位</a>
 			</dd>
 			{%else%}
 			<dd>
-				<a href="positions.html">有效职位</a>
+				<a href="/com/my/job/1">有效职位</a>
 			</dd>
 			<dd class="current">
-				<a href="positions.html">已下线职位</a>
+				<a href="/com/my/job/0">已下线职位</a>
 			</dd>
 			{%endif%}
-
 
 		</dl>
 	</div>
@@ -47,11 +47,11 @@
 		<dl class="company_center_content">
 			<dt>
 				<h1>
-					<em></em>{% if state == 1 %} 有效职位 {%else%}已下线职位 {%endif%}<span>（共<i style="color:#fff;font-style:normal" id="positionNumber">1</i>个）</span>					</h1>
+					<em></em>{% if state == 1 %} 有效职位 {%else%}已下线职位 {%endif%} </h1>
 			</dt>
 			<dd>
 
-   {% for com_job in com_jobs %}
+				{% for com_job in com_jobs %}
 				<form id="searchForm">
 					<input type="hidden" value="Publish" name="type">
 					<ul class="reset my_jobs">
@@ -65,16 +65,16 @@
 							<div class="c9">发布时间： {{com_job.com_job_f_time}}</div>
 							<div class="links">
 
-								{% if state == 1 %} <a target="_blank" class="job_edit" href="">编辑</a>
-								<a class="job_offline" href="javascript:void(0)">下线</a>
-								{%else%}<a class="job_offline">已下线</a> {%endif%}
+								{% if state == 1 %} <a target="_blank" class="job_edit" href="/com/update/job/{{com_job.com_job_id}}">编辑</a>
+								<a class="job_offline" href="javascript:void(0)">下线</a> {%else%}
+								<a class="job_offline">已下线</a> {%endif%}
 
 							</div>
 						</li>
 					</ul>
 				</form>
 
- {% endfor %}
+				{% endfor %}
 
 
 

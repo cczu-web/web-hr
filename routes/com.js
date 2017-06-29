@@ -100,11 +100,23 @@ router
     await comservice.r_com_some_jobs(ctx);
   })
 
-
+  /**
+   *我收到的简历，
+   *未录取为-1
+   *待确认为0
+   *已录取简历为1
+   *待查看简历2
+   *已查看3
+   */
+  .get('job/cv/:state', async (ctx, next) => {
+    await comservice.getSomeSeeks(ctx);
+  })
 
 //公司选定求职者
-
-  .post('select', async (ctx, next) => {
+/**
+ * select 选定一个求职者
+ */
+  .get('cv/:way/:id', async (ctx, next) => {
     await comservice.selectSeeker(ctx);
   })
 
