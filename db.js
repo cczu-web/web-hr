@@ -13,7 +13,15 @@ let sequelize = new Sequelize(config.database, config.database_username, config.
     },
     logging: true,
 });
+let term_exp = sequelize.define('term_exp', {
+    term_exp_id: { type: Sequelize.INTEGER(11), primaryKey: true },
+    term_exp: Sequelize.STRING(45),
+    parent_id: Sequelize.INTEGER(11),
 
+}, {
+        timestamps: false
+    }
+);
 //职位类别表term_job
 let term_job = sequelize.define('term_job', {
     term_job_id: { type: Sequelize.INTEGER(11), primaryKey: true },
@@ -185,6 +193,7 @@ module.exports = {
     term_job,
     term_edu,
     term_salary,
+    term_exp,
     users,
     seekers,
     seekers_edu,
