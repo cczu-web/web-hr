@@ -1,5 +1,5 @@
 let db = require('../db');
-
+let UTILS = require('../utils');
 module.exports = {
 
     /**
@@ -59,20 +59,10 @@ module.exports = {
      * 
      */
     insertSeek_job: async (seek_job) => {
-       
-        await db.seek_job.create({
-           com_job_id:seek_job.com_job_id,
-           seeker_phone:seek_job.seeker_phone,
-           seek_time:seek_job.seek_time,
-           seek_job_verify:seek_job.seek_job_verify,
-       })
-        console.log('记忆');
-       // let sql ="  SELECT last_insert_id() as seek_job_id ";
-      //  let result = await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT });
-
-      //  if (result.length > 0) return result[0].seek_job_id;
-        //else return false;
-    
+       console.log('记忆');
+let sql = "INSERT INTO `seek_job` (`seek_job_id`,`com_job_id`,`seeker_phone`,`seek_time`,`seek_job_verify`) VALUES (NULL,"+"'"
++seek_job.com_job_id+"','"+seek_job.seeker_phone+"','"+UTILS.formatDateTime(seek_job.seek_time)+"',"+seek_job.seek_job_verify+")";
+await db.sequelize.query(sql, { type: db.sequelize.QueryTypes.INSERT });
 },
   //更新所有求职者的状态
     updateAll_seeker_status: async (com_user_phone,com_job_id) => {

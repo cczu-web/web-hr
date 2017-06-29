@@ -13,6 +13,20 @@ let sequelize = new Sequelize(config.database, config.database_username, config.
     },
     logging: true,
 });
+
+//招聘求职表seek_job
+let seek_job  = sequelize.define('seek_job', {
+     seek_job_id: { type: Sequelize.INTEGER(11), primaryKey: true },
+    com_job_id: Sequelize.INTEGER(11),
+    seeker_phone: Sequelize.STRING(20),
+    seek_time: Sequelize.DATE,
+    end_time:Sequelize.DATE,
+    seek_job_verify: Sequelize.TEXT('tiny'),
+    
+}, {
+        timestamps: false
+    }
+);
 let term_exp = sequelize.define('term_exp', {
     term_exp_id: { type: Sequelize.INTEGER(11), primaryKey: true },
     term_exp: Sequelize.STRING(45),
@@ -173,21 +187,8 @@ let com_job = sequelize.define('com_job', {
         timestamps: false
     }
 );
-//招聘求职表seek_job
-let seek_job = sequelize.define('seek_job', {
-    seek_job_id: { type: Sequelize.INTEGER(11), primaryKey: true },
-    com_job_id: Sequelize.INTEGER(11),
-    seeker_phone: Sequelize.STRING(20),
-    seek_time: Sequelize.DATE,
-    end_time:Sequelize.DATE,
-    seek_job_verify: Sequelize.TEXT('tiny'),
-  
 
 
-}, {
-        timestamps: false
-    }
-);
 module.exports = {
     sequelize,
     term_job,
