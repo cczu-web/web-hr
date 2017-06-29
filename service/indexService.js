@@ -17,7 +17,7 @@ let getUser = (ctx) => {
 
 let com_job_type_add = (ctx, type, value) => {
     let com_job = UTILS.parse(ctx.cookies.get('search_com_job'));
-if(value=='不限')   return com_job;
+    if (value == '不限') return com_job;
     if (type == 'com_job_city') com_job.com_job_city = value;
     if (type == 'com_job_salary') com_job.com_job_salary = value;
     if (type == 'com_job_edu') com_job.com_job_edu = value;
@@ -125,26 +125,24 @@ module.exports = {
         }
     },
 
-
     //查看一条职位信息
     r_JobInfo: async (ctx) => {
         let job_id = ctx.params.id;
-       
-        let seek_verify=await seek_jobDAO.getOneSeek(job_id,ctx.state.seeker.seeker_user_phone);
+        let seek_verify = await seek_jobDAO.getOneSeek(job_id, ctx.state.seeker.seeker_user_phone);
         let jobInfo = await comdao.getCom_job(job_id);
-         console.log('加油'+ctx.state.seeker.seeker_user_phone);
+        let com = await comdao.getCom(jobInfo.com_user_phone);
+    
 
         ctx.render('job_info.html', {
+            title:jobInfo.com_job,
             com_job: jobInfo,
-            nowUser:getUser(ctx),
-             seeker: ctx.state.seeker,
-               com: ctx.state.com,
-               seek_verify:'已申请'
-
-
+            nowUser: getUser(ctx),
+            seeker: ctx.state.seeker,
+            com: com,
+            seek_verify: seek_verify
         });
-    },
 
+    },
 
     //查看一家公司的信息
     r_com_info: async (ctx) => {
@@ -155,7 +153,6 @@ module.exports = {
             nowUser: getUser(ctx),
             seekerUser: ctx.state.seeker,
             comUser: ctx.state.com
-
 
         })
     },
@@ -187,7 +184,7 @@ module.exports = {
         let term_salary = await admindao.getTerm_salary();
 
         ctx.render('joblist.html', {
-            com_job :com_job,
+
             term_edu: term_edu,
             term_exp: term_exp,
             term_job: term_job,

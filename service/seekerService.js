@@ -59,7 +59,9 @@ module.exports = {
         ctx.render('s_index.html', {
             nowUser:'seeker',
             seeker: seeker,
+             seekerUser:ctx.state.seeker,
             seeker_edu: seeker_edu,
+            
             seeker_exp: seeker_exp,
         });
     },
@@ -70,6 +72,7 @@ r_seekerInfo: async (ctx) => {
     // console.log(seeker.seeker_edu);
       ctx.render('s_info.html', {
             nowUser:'seeker',
+             seekerUser:ctx.state.seeker,
             seeker: seeker,
             
         });
@@ -167,8 +170,8 @@ r_seekerInfo: async (ctx) => {
             seek_job.seeker_phone=ctx.state.seeker.seeker_user_phone;
             seek_job.seek_time=new Date();
             seek_job.seek_job_verify=2;
-
-           await seek_jobDAO.insertSeek_job(seek_job);//
+        
+           await seek_jobDAO.insertSeek_job(seek_job);
             
 
         }
@@ -180,6 +183,8 @@ r_seekerInfo: async (ctx) => {
                 ctx.render('s_seek_info.html', {
                     nowUser:'seeker',
               seek_job_info:seek_job_info,
+               seekerUser:ctx.state.seeker,
+
           });
 
         }
@@ -191,6 +196,7 @@ r_seekerInfo: async (ctx) => {
                 ctx.render('s_seek_info.html', {
                     nowUser:'seeker',
               seek_job_info:seek_job_info,
+               seekerUser:ctx.state.seeker,
           });
 
         }
@@ -201,6 +207,9 @@ r_seekerInfo: async (ctx) => {
          let seek_job_id=ctx.params.id;
          let seek_job_info= await seek_jobDAO.getOneSeek_job(seek_job_id);
          ctx.render('s_seek_info.html',{
+              nowUser:'seeker',
+            seeker: seeker,
+             seekerUser:ctx.state.seeker,
             seek_job_info:seek_job_info,
          });
       },
@@ -213,7 +222,7 @@ r_seekerInfo: async (ctx) => {
         ctx.render('delivery.html', {
 
             nowUser:'seeker',
-            seeker: seeker,
+            seekerUser:ctx.state.seeker,
             jobs:jobs,
         });
 
