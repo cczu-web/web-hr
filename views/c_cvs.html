@@ -1,0 +1,175 @@
+{% extends "base.html" %} {% block main %}
+<div id="container">
+	<div class="sidebar">
+		<a class="btn_create" href="/com/publish/job">发布新职位</a>
+		<dl class="company_center_aside">
+			<dt>我收到的简历</dt>
+
+			{% if state == 2 %}
+			<dd class="current">{%else%}
+				<dd>{%endif%}
+					<a href="/com/job/cv/2">待查看简历</a>
+				</dd>
+				{% if state == 3 %}
+				<dd class="current">{%else%}
+					<dd>{%endif%}
+						<a href="/com/job/cv/3">已查看简历</a>
+					</dd>
+					{% if state == 1 %}
+					<dd class="current">{%else%}
+						<dd>{%endif%}
+							<a href="/com/job/cv/1">已通知面试简历</a>
+						</dd>
+						{% if state == -1 %}
+						<dd class="current">{%else%}
+							<dd>{%endif%}
+								<a href="/com/job/cv/-1">不合适简历</a>
+							</dd>
+		</dl>
+		<dl class="company_center_aside">
+			<dt>我发布的职位</dt>
+			<dd>
+				<a href="/com/my/job/1">有效职位</a>
+			</dd>
+			<dd>
+				<a href="/com/my/job/0">已下线职位</a>
+			</dd>
+		</dl>
+	</div>
+	<!-- end .sidebar -->
+	<div class="content">
+		<dl class="company_center_content">
+			<dt>
+				<h1>
+					<em></em> {{title}} </h1>
+			</dt>
+			<dd>
+				<form action="c_InterviewResumes.html" method="get" id="filterForm">
+					<div class="filter_actions">
+						<label class="checkbox">
+		                        		<input type="checkbox">
+		                                <i></i>
+		                        	</label>
+						<span>全选</span>
+						<a id="resumeRefuseAll" href="javascript:;"></a>
+						<div id="filter_btn" class="">筛选简历 <em class=""></em></div>
+					</div>
+					<!-- end .filter_actions -->
+					<div class="filter_options  dn " style="display: none;">
+						<dl>
+							<dt>简历状态：</dt>
+							<dd>
+								<a rel="-1" class="current" href="javascript:;">不限</a>
+								<a rel="1" href="javascript:;">未阅读</a>
+								<a rel="2" href="javascript:;">已阅读</a>
+								<a rel="3" href="javascript:;">已转发</a>
+								<input type="hidden" value="-1" name="resumeStatus">
+							</dd>
+						</dl>
+						<dl>
+							<dt>简历形式：</dt>
+							<dd>
+								<a rel="-1" class="current" href="javascript:;">不限</a>
+								<a rel="0" href="javascript:;">附件简历</a>
+								<a rel="1" href="javascript:;">在线简历</a>
+								<input type="hidden" value="-1" name="resumeType">
+							</dd>
+						</dl>
+						<dl>
+							<dt>工作经验：</dt>
+							<dd>
+								<a rel="-1" class="current" href="javascript:;">不限</a>
+								<a rel="1" href="javascript:;">应届毕业生</a>
+								<a rel="2" href="javascript:;">一年以下</a>
+								<a rel="3" href="javascript:;">1-3年</a>
+								<a rel="4" href="javascript:;">3-5年</a>
+								<a rel="5" href="javascript:;">5-10年</a>
+								<a rel="6" href="javascript:;">10年以上</a>
+								<input type="hidden" value="-1" name="workExp">
+							</dd>
+						</dl>
+						<dl>
+							<dt>最低学历：</dt>
+							<dd>
+								<a rel="-1" class="current" href="javascript:;">不限</a>
+								<a rel="1" href="javascript:;">大专及以上</a>
+								<a rel="2" href="javascript:;">本科及以上</a>
+								<a rel="3" href="javascript:;">硕士及以上</a>
+								<a rel="4" href="javascript:;">博士及以上</a>
+								<input type="hidden" value="-1" name="eduExp">
+							</dd>
+						</dl>
+						<input type="hidden" value="0" name="filterStatus" id="filterStatus">
+						<input type="hidden" value="" name="positionId" id="positionId">
+					</div>
+					<!-- end .filter_options -->
+					{% for cv in seekers %}
+
+					<ul class="reset resumeLists">
+						<li data-id="1686182" class="onlineResume">
+							<label class="checkbox">
+			                                    <input type="checkbox">
+			                                    <i></i>
+			                                </label>
+							<div class="resumeShow">
+								<a title="预览在线简历" target="_blank" class="resumeImg" href="resumeView.html?deliverId=1686182">
+			                                    	<img src="/style/images/default_headpic.png">
+			                                    </a>
+								<div class="resumeIntro">
+									<h3 class="unread">
+										<a target="_blank" title="预览jason的简历" href="">
+			                                        				                                            {{cv.seeker_name}}的简历
+			                                        	</a>
+										<em></em>
+									</h3>
+									<span class="fr">投递时间：{{cv.seek_f_time}}</span>
+									<div>
+										{{cv.seeker_name}} / {{cv.seeker_sex}} /{{cv.seeker_edu}} /{{cv.seeker_exp}} / {{cv.seeker_city}} <br>{{cv.seeker_edu}}
+									</div>
+									<div class="jdpublisher">
+										<span>
+				                                        	应聘职位：<a title="{{cv.com_job}}" target="_blank" href="/job_info/{{cv.com_job_id}}">{{cv.com_job}}&nbsp;{{cv.com_job_name}} </a>
+				                                       						                                        </span>
+									</div>
+								</div>
+								<div class="links">
+									<a class="resume_notice" href="/com/cv/select/{{cv.seek_job_id}}">通知面试</a>
+									<a  class="resume_refuse" href="/com/cv/cancel/{{cv.seek_job_id}}">不合适</a>
+									<a data-resumename="jason的简历" data-positionname="随便写" data-deliverid="1686182" data-positionid="149594" data-resumekey="1ccca806e13637f7b1a4560f80f08057"
+									 data-forwardcount="1" class="resume_forward" href="javascript:void(0)">
+
+								</div>
+							</div>
+							<div class="contactInfo">
+								<span class="c9">电话：</span>{{cv.seeker_user_phone}} &nbsp;&nbsp;&nbsp;
+								<span class="c9">邮箱：</span><a href="{[cv.seeker_email]}">{{cv.seeker_email}}</a>
+							</div>
+						</li>
+					</ul>
+					<!-- end .resumeLists -->
+					{%endfor%}
+
+
+
+				</form>
+			</dd>
+		</dl>
+		<!-- end .company_center_content -->
+	</div>
+	<!-- end .content -->
+
+
+
+
+
+
+
+	<script>
+
+	</script>
+	<div class="clear"></div>
+	<input type="hidden" value="b4bc225f0d084ee5b8d045f9c98a49ff" id="resubmitToken">
+	<a rel="nofollow" title="回到顶部" id="backtop"></a>
+</div>
+<!-- end #container -->
+{% endblock %}

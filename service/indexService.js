@@ -12,8 +12,7 @@ let getUser =(ctx)=>{
        if(ctx.state.com != null) {
            return 'com'
        }
-       
-       
+    
            return 'null'
        
 }
@@ -26,8 +25,8 @@ module.exports = {
             ctx.render('index.html', {
 
                 nowUser: getUser(ctx),
-                seeker: ctx.state.seeker,
-                   com: ctx.state.com
+                 seekerUser: ctx.state.seeker,
+             comUser: ctx.state.com
             });
       
    
@@ -95,27 +94,22 @@ module.exports = {
     //查看一条职位信息
     r_JobInfo: async (ctx) => {
         let job_id = ctx.params.id;
-    
       
-        let jobInfo = await comdao.getCom_job(job_id);
+        let com_job = await comdao.getCom_job(job_id);
+        let com = await comdao.getCom(com_job.com_user_phone);
+
+      
         ctx.render('job_info.html', {
-            com_job: jobInfo,
+            com_job: com_job,
+            com:com,
             nowUser:getUser(ctx),
-             seeker: ctx.state.seeker,
-               com: ctx.state.com
+             seekerUser: ctx.state.seeker,
+             comUser: ctx.state.com
 
          
         });
     },
 
-      //查看一条职位信息
-     r_JobInfo:async(ctx)=>{
-         let job_id=ctx.params.id;
-         let jobInfo =await comdao.getCom_job(job_id);
-        ctx.render('job_info.html',{
-        jobInfo:jobInfo,
-     });
-    } ,
      //查看一家公司的信息
     r_com_info:async(ctx)=>{
         let com_id=ctx.params.id;

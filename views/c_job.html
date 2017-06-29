@@ -45,7 +45,12 @@
         <dl class="company_center_content">
             <dt>
                 <h1>
-                    <em></em> 发布新职位
+                    <em></em> 
+                      {% if com_job.com_job_id != null%}
+                更新职位
+                    {%else%}
+                  发布新职位
+                        {%endif%}
 
                 </h1>
             </dt>
@@ -595,7 +600,8 @@
                                     <input type="hidden" value="{{com_job.com_user_phone}}" name="com_user_phone">
                                     <input type="hidden" value="{{com_job.com_job_id}}" name="com_job_id">
                                     <td colspan="2">
-                                        {% if com.com_job_id != null%}
+                                      
+                                        {% if com_job.com_job_id != null %}
                                         <input type="submit" value="更新" class="btn_32"> {%else%}
                                         <input type="submit" value="发布" class="btn_32"> {%endif%}
                                     </td>
