@@ -78,7 +78,6 @@ module.exports = {
     },
 
 
-
     r_getCom_job: async (ctx) => {
         let com_job_id = ctx.params.id;
         let com_job = await comdao.getCom_job(com_job_id);

@@ -1,4 +1,4 @@
-var db = require('../db');
+let db = require('../db');
 let userdao = require('../dao/usersDAO');
 let seekerdao = require('../dao/seekersDAO');
 let seek_jobDAO=require('../dao/seek_jobDAO');
@@ -39,14 +39,13 @@ module.exports = {
 
         } else {
                ctx.render('s_login.html', {
+                   nowUser:'seeker',
                    msg : msg
 
       });
         }
 
     },
-
-
 
     r_seekerIndex: async (ctx) => {
 
@@ -56,6 +55,7 @@ module.exports = {
         let seeker_exp = await seekerdao.getSeeker_all_exp(seeker.seeker_user_phone);
 
         ctx.render('s_index.html', {
+            nowUser:'seeker',
             seeker: seeker,
             seeker_edu: seeker_edu,
             seeker_exp: seeker_exp
@@ -159,6 +159,7 @@ module.exports = {
            let seek_job_id= await seek_jobDAO.insertSeek_job(seek_job);//此处逻辑如何搭建，插入数据库之后
            let seek_job_info=await seek_jobDAO.getOneSeek_job(seek_job_id);
               ctx.render('s_seek_info.html', {
+                  nowUser:'seeker',
               seek_job_info:seek_job_info,
           });
         }
@@ -167,6 +168,7 @@ module.exports = {
             await seek_jobDAO.updateOneSeek_job(id,seek_job_verify);
             let seek_job_info=await seek_jobDAO.getOneSeek_job(id);
                 ctx.render('s_seek_info.html', {
+                    nowUser:'seeker',
               seek_job_info:seek_job_info,
           });
         }
@@ -175,6 +177,7 @@ module.exports = {
             await seek_jobDAO.updateOneSeek_job(id,seek_job_verify);
                 let seek_job_info=await seek_jobDAO.getOneSeek_job(id);
                 ctx.render('s_seek_info.html', {
+                    nowUser:'seeker',
               seek_job_info:seek_job_info,
           });
         }
@@ -190,6 +193,7 @@ module.exports = {
          let jobs= await seek_jobDAO.getSome_seek_job(seeker.seeker_user_phone);
 
         ctx.render('s_jobs.html', {
+            nowUser:'seeker',
             seeker: seeker,
             jobs:jobs,
         });
