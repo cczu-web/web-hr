@@ -120,10 +120,13 @@ module.exports = {
 
     //发布职位
     r_com_publish_job: async (ctx) => {
-        let job = UTILS.getCom_jobbyCTX(ctx);
-
-        comdao.insertCom_job(com_job);
-        //     ctx.response.redirect('/job_info/' + com_job.com_job_id);
+        let com_job = UTILS.getCom_jobbyCTX(ctx);
+                console.log(ctx.request.body.com_job_type);
+        
+        console.log(com_job);
+        await comdao.insertCom_job(com_job);
+        
+        ctx.response.redirect('/com/my/job/1');
 
 
     },

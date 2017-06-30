@@ -24,6 +24,7 @@ let seek_job  = sequelize.define('seek_job', {
     seek_job_verify: Sequelize.TEXT('tiny'),
     
 }, {
+     tableName: 'seek_job',
         timestamps: false
     }
 );
@@ -33,6 +34,7 @@ let term_exp = sequelize.define('term_exp', {
     parent_id: Sequelize.INTEGER(11),
 
 }, {
+      tableName: 'term_exp',
         timestamps: false
     }
 );
@@ -43,6 +45,7 @@ let term_job = sequelize.define('term_job', {
     parent_id: Sequelize.INTEGER(11),
 
 }, {
+    tableName: 'term_job',
         timestamps: false
     }
 );
@@ -51,6 +54,8 @@ let term_edu = sequelize.define('term_edu', {
     term_edu_id: { type: Sequelize.INTEGER(11), primaryKey: true },
     term_edu: Sequelize.STRING(30),
 }, {
+         tableName: 'term_edu',
+    
         timestamps: false
     }
 );
@@ -59,6 +64,7 @@ let term_salary = sequelize.define('term_salary', {
     term_salary_id: { type: Sequelize.INTEGER(11), primaryKey: true },
     term_salary: Sequelize.STRING(30),
 }, {
+     tableName: 'term_salary',
         timestamps: false
     }
 );
@@ -69,6 +75,7 @@ let users = sequelize.define('user', {
     user_pwd: Sequelize.STRING(100),
     user_role: Sequelize.INTEGER(1),
 }, {
+     tableName: 'users',
         timestamps: false
     }
 );
@@ -90,7 +97,9 @@ let seekers = sequelize.define('seekers', {
     seeker_now:Sequelize.TEXT('tiny'),
     seeker_edu: Sequelize.STRING(45),
 }, {
+     tableName: 'seekers',
         timestamps: false
+           
     }
 );
 
@@ -105,6 +114,7 @@ let seekers_edu = sequelize.define('seekers_edu', {
     seeker_edu_education: Sequelize.STRING(30),
 
 }, {
+        tableName: 'seekers_edu',
         timestamps: false
     }
 );
@@ -122,6 +132,7 @@ let seekers_exp = sequelize.define('seekers_exp', {
     seeker_exp_comSize: Sequelize.STRING(30),
 
 }, {
+     tableName: 'seekers_exp',
         timestamps: false
     }
 );
@@ -135,6 +146,7 @@ let seekers_certificate = sequelize.define('seekers_certificate', {
 
 
 }, {
+
         timestamps: false
     }
 );
@@ -162,6 +174,7 @@ let coms = sequelize.define('coms', {
 
 
 }, {
+     tableName: 'coms',
         timestamps: false
     }
 );
@@ -184,6 +197,7 @@ let com_job = sequelize.define('com_job', {
     com_job_publish_time: Sequelize.DATE,
     
 }, {
+    tableName: 'com_job',
         timestamps: false
     }
 );

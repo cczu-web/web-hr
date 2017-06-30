@@ -70,7 +70,9 @@ router
 
     ctx.render('c_job.html', {
       nowUser:'com',
-      com: ctx.state.com
+      com: ctx.state.com,
+         comUser: ctx.state.com
+
     });
   })
 

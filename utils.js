@@ -80,21 +80,21 @@ let getCombyCTX = (ctx) => {
 let getCom_jobbyCTX =(ctx) =>{
     let com_job={};
 
-com_job.com_job_id = ctx.request.body.com_job_id
-com_job.com_user_phone = ctx.request.body.com_user_phone
-com_job.com_job= ctx.request.body.com_job
-com_job.com_job_name = ctx.request.body.com_job_name
-com_job.com_job_province= ctx.request.body.com_job_province
-com_job.com_job_city= ctx.request.body.com_job_city
-com_job.com_job_salary = ctx.request.body.com_job_salary
-com_job.com_job_num = ctx.request.body.com_job_num
-com_job.com_job_edu = ctx.request.body.com_job_edu
-com_job.com_job_exp = ctx.request.body.com_job_exp
-com_job.com_job_type= ctx.request.body.com_job_type
-com_job.com_job_desc= ctx.request.body.com_job_desc
+com_job.com_job_id = ctx.request.body.com_job_id;
+com_job.com_user_phone = ctx.request.body.com_user_phone;
+com_job.com_job= ctx.request.body.com_job;
+com_job.com_job_name = ctx.request.body.com_job_name;
+com_job.com_job_province= ctx.request.body.com_job_province;
+com_job.com_job_city= ctx.request.body.com_job_city;
+com_job.com_job_salary = ctx.request.body.com_job_salary;
+com_job.com_job_num = ctx.request.body.com_job_num;
+com_job.com_job_edu = ctx.request.body.com_job_edu;
+com_job.com_job_exp = ctx.request.body.com_job_exp;
+com_job.com_job_type= ctx.request.body.com_job_type;
+com_job.com_job_desc= ctx.request.body.com_job_desc;
 com_job.com_job_publish_time= formatDateTime(new Date());
-com_job.com_job_status = ctx.request.body.com_job_status
-com_job.com_job_addr= ctx.request.body.com_job_addr
+com_job.com_job_status = ctx.request.body.com_job_status;
+com_job.com_job_addr= ctx.request.body.com_job_addr;
     return com_job;
 
 }

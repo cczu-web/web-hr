@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block main %}
 <div id="container">
 	<div class="sidebar">
-		<a class="btn_create" href="create.html">发布新职位</a>
+		<a class="btn_create" href="/com/publish/job">发布新职位</a>
 		<dl class="company_center_aside">
 			<dt>我收到的简历</dt>
 
@@ -57,10 +57,10 @@
 					<ul class="reset my_jobs">
 						<li data-id="">
 							<h3>
-								<a target="_blank" title="{{com_job.com_job}}" href="">{{com_job.com_job}}</a>
+								<a target="_blank" title="{{com_job.com_job}}" href="/com/update/job/{{com_job.com_job_id}}">{{com_job.com_job}}</a>
 								<span>{{com_job.com_job_city}}</span>
 							</h3>
-							<span class="receivedResumeNo"><a href="">应聘简历</a></span>
+							<span class="receivedResumeNo"><a href="/com/job/cv/2">应聘简历</a></span>
 							<div>{{com_job.com_job_type}} / {{com_job.com_job_salary}}k / 工作经验：{{com_job.com_job_exp}} / {{com_job.com_job_edu}}</div>
 							<div class="c9">发布时间： {{com_job.com_job_f_time}}</div>
 							<div class="links">

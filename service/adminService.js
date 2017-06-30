@@ -81,13 +81,14 @@ module.exports = {
     r_select_allInfo :async(ctx) => {
         let way=ctx.params.way;
         if (way=='coms'){
-             let coms = admindao.getAllcoms;
+             let coms = await admindao.getAllcoms();
+        
              ctx.render('a_allComs.html',{
               coms:coms,
              });
         }
         else if(way=='seekers'){
-            let  seekers=admindao.getAllseeker;
+            let  seekers= await admindao.getAllseeker();
              ctx.render('a_allSeekers.html',{
                  seekers:seekers,
              });

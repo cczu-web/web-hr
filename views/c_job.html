@@ -1,34 +1,34 @@
 ﻿{% extends "base.html" %} {% block main %}
 <div id="container">
     <div class="sidebar">
-        <a class="btn_create" href="create.html">发布新职位</a>
+        <a class="btn_create" href="/com/publish/job">发布新职位</a>
         <dl class="company_center_aside">
             <dt>我收到的简历</dt>
             <dd>
                 <a href="">待处理简历</a>
             </dd>
             <dd>
-                <a href="canInterviewResumes.html">待定简历</a>
+                <a href="/com/job/cv/2">待定简历</a>
             </dd>
             <dd>
-                <a href="haveNoticeResumes.html">录取简历</a>
+                <a href="/com/job/cv/1">录取简历</a>
             </dd>
             <dd>
-                <a href="haveRefuseResumes.html">不合适简历</a>
+                <a href="/com/job/cv/-1">不合适简历</a>
             </dd>
         </dl>
         <dl class="company_center_aside">
             <dt>我发布的职位</dt>
             <dd>
-                <a href="positions.html">有效职位</a>
+                <a href="/com/my/job/1">有效职位</a>
             </dd>
             <dd>
-                <a href="positions.html">已下线职位</a>
+                <a href="/com/my/job/0">已下线职位</a>
             </dd>
         </dl>
         <div class="subscribe_side mt20">
             <div class="f14">想收到更多更好的简历？</div>
-            <div class="f18 mb10">就用拉勾招聘加速助手 </div>
+            <div class="f18 mb10">就用招聘加速助手 </div>
             <div>
                 咨询：<a class="f16" href="mailto:jessica@lagou.com">jessica@lagou.com</a>
             </div>
@@ -430,28 +430,22 @@
                                     <td width="85">工作性质</td>
                                     <td>
                                         <ul class="profile_radio clearfix reset">
-                                            {% if com_job.com_job_type == '全职'%}
-                                            <li class="current">
-                                                {%else%}
+                                       
                                                 <li>
-                                                    {%endif%} 全职
+                                                   全职
 
                                                     <em></em>
                                                     <input type="radio" name="com_job_type" value="全职">
                                                 </li>
-                                                {% if com_job.com_job_type == '兼职'%}
-                                                <li class="current">
-                                                    {%else%}
+                                            
                                                     <li>
-                                                        {%endif%} 兼职
+                                                     兼职
                                                         <em></em>
                                                         <input type="radio" name="com_job_type" value="兼职">
                                                     </li>
-                                                    {% if com_job.com_job_type == '实习'%}
-                                                    <li class="current">
-                                                        {%else%}
+                                                
                                                         <li>
-                                                            {%endif%} 实习
+                                                         实习
                                                             <em></em>
                                                             <input type="radio" name="com_job_type" value="实习">
                                                         </li>
@@ -597,7 +591,7 @@
                                 <tr>
                                     <td width="25"></td>
                                     <input type="hidden" value="1" name="com_job_status">
-                                    <input type="hidden" value="{{com_job.com_user_phone}}" name="com_user_phone">
+                                    <input type="hidden" value="{{com.com_user_phone}}" name="com_user_phone">
                                     <input type="hidden" value="{{com_job.com_job_id}}" name="com_job_id">
                                     <td colspan="2">
                                       

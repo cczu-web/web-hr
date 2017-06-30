@@ -9,7 +9,7 @@ router
     if (ctx.cookies.get('user_cookie')) {
       ctx.response.redirect('/');
     } else {
-      ctx.render('admin_login.html', {});
+      ctx.render('a_login.html', {});
     }
   })
 .post('login_valid', async (ctx, next) => {

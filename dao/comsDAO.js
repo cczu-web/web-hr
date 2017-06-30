@@ -86,6 +86,7 @@ module.exports = {
         await db.com_job.create({
             com_user_phone:com_job.com_user_phone,
             com_job:com_job.com_job,
+             com_job_name:com_job.com_job_name,
             com_job_province:com_job.com_job_province,
             com_job_city:com_job.com_job_city,
             com_job_salary:com_job.com_job_salary,
@@ -96,7 +97,7 @@ module.exports = {
             com_job_desc:com_job.com_job_desc,
             com_job_publish_time:com_job.com_job_publish_time, 
             com_job_status:com_job.com_job_status,
-            com_job_addr:com_job.com_job_ddr,  
+            com_job_addr:com_job.com_job_addr,  
         })
     },
 

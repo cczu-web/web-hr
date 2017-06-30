@@ -5,7 +5,16 @@
     <table>
         <tr><td>公司电话</td><td>公司名称</td><td>注册时间</td><td>公司性质</td><td>公司邮箱</td><td>公司固定电话</td><td>z注册资金</td><td>公司地址</td><td>公司描述</td><td>公司网址</td></tr>
          {% for com in coms %}
-        <tr><td>{{com.com_user_phone)}}</td><td>{{com.com_name}}</td><td>{{com.com_date}}</td><td>{{com.com_type}}</td><td>{{com.com_email}}</td><td>{{com.com_tel}}</td><td>{{com.com_capital}}</td><td>{{com.com_addr}}</td><td>{{com.com_desc}}</td><td>{{com.com_website}}</td></tr>
+        <tr><td>{{com.com_user_phone}}</td>
+        <td>{{com.com_name}}</td>
+        <td>{{com.com_date}}</td>
+        <td>{{com.com_type}}</td>
+        <td>{{com.com_email}}</td>
+        <td>{{com.com_tel}}</td>
+        <td>{{com.com_capital}}</td>
+        <td>{{com.com_addr}}</td>
+        <td>{{com.com_desc}}</td>
+        <td>{{com.com_website}}</td></tr>
          {% endfor %}
     </table>
 

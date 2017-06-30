@@ -128,7 +128,8 @@ module.exports = {
     //查看一条职位信息
     r_JobInfo: async (ctx) => {
         let job_id = ctx.params.id;
-        let seek_verify = await seek_jobDAO.getOneSeek(job_id, ctx.state.seeker.seeker_user_phone);
+        let seek_verify = 4;
+        if(ctx.state.seeker!=null) seek_verify = await seek_jobDAO.getOneSeek(job_id, ctx.state.seeker.seeker_user_phone);
         let jobInfo = await comdao.getCom_job(job_id);
         let com = await comdao.getCom(jobInfo.com_user_phone);
     
@@ -137,6 +138,8 @@ module.exports = {
             title:jobInfo.com_job,
             com_job: jobInfo,
             nowUser: getUser(ctx),
+             comUser: ctx.state.com,
+             seekerUser: ctx.state.seeker,
             seeker: ctx.state.seeker,
             com: com,
             seek_verify: seek_verify
